@@ -10,6 +10,7 @@
     "aosp:setup": "./scripts/setup_aosp_android15.sh",
     "aosp:emulator": "./scripts/run_aosp_emulator.sh",
     "aosp:build": "./scripts/build_seldon_aosp.sh",
+    "aosp:deploy": "./scripts/deploy_to_emulator.sh",
     "docs:verify": "./scripts/verify_feature_docs.sh",
     "hooks:install": "./scripts/install_hooks.sh",
     "test:projects": "./scripts/run_all_project_tests.sh"

@@ -64,8 +64,8 @@ yes | sdkmanager --licenses >/dev/null 2>&1 || true
 echo "Instalando platform-tools e emulador..."
 sdkmanager "platform-tools" "emulator"
 
-IMAGE_TARGET="system-images;android-35;google_apis;x86_64"
-echo "Instalando imagem do sistema: $IMAGE_TARGET..."
+IMAGE_TARGET="system-images;android-35;default;x86_64"
+echo "Instalando imagem pura do AOSP Android 15: $IMAGE_TARGET..."
 sdkmanager "$IMAGE_TARGET"
 
 # 5. Criar AVD se não existir
@@ -73,8 +73,8 @@ AVD_NAME="Seldon_AOSP_API35"
 if avdmanager list avd | grep -q "$AVD_NAME"; then
     echo -e "${GREEN}✓ Dispositivo virtual '$AVD_NAME' já configurado.${NC}"
 else
-    echo "Criando dispositivo virtual '$AVD_NAME' (Pixel 8 / API 35)..."
-    echo "no" | avdmanager create avd -n "$AVD_NAME" -k "$IMAGE_TARGET" --device "pixel_8" --force
+    echo "Criando dispositivo virtual '$AVD_NAME' (Pixel 7 / API 35 AOSP)..."
+    echo "no" | avdmanager create avd -n "$AVD_NAME" -k "$IMAGE_TARGET" --device "pixel_7" --force
     echo -e "${GREEN}✓ AVD '$AVD_NAME' criado com sucesso!${NC}"
 fi
 

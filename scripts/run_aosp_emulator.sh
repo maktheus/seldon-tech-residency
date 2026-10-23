@@ -31,14 +31,7 @@ echo -e "${BLUE}================================================================
 
 if [ "$MODE" = "headless" ]; then
     echo -e "${YELLOW}Iniciando em modo Headless (Sem Janela / CI Benchmark)...${NC}"
-    emulator -avd "$AVD_NAME" -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on &
-    EMULATOR_PID=$!
-    echo -e "${GREEN}Emulador iniciado em background com PID: $EMULATOR_PID${NC}"
-    echo "Aguardando dispositivo via adb..."
-    adb wait-for-device
-    echo -e "${GREEN}✓ Dispositivo online! Testando adb root...${NC}"
-    adb root || true
-    echo -e "${GREEN}Pronto para injeção de daemons e benchmarks de sistema.${NC}"
+    emulator -avd "$AVD_NAME" -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on
 else
     echo -e "${YELLOW}Iniciando com Interface Gráfica e Aceleração de GPU do Host...${NC}"
     emulator -avd "$AVD_NAME" -gpu host -accel on -memory 4096 -cores 4

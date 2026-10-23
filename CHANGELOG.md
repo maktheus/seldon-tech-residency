@@ -7,6 +7,14 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ## [Unreleased] - 2026-10-23
 
+### Adicionado (Deploy e Validação ao Vivo no Emulador AOSP Android 15)
+- **Execução Real no Emulador AOSP Android 15 (Kernel 6.6 / API 35)**:
+  - Criação e inicialização do AVD `Seldon_AOSP_API35` com imagem pura de AOSP.
+  - Script automatizado `scripts/deploy_to_emulator.sh` e comando `npm run aosp:deploy`.
+  - Confirmação de superusuário `adb root` (UID 0) e leitura direta de telemetria no kernel Linux (`5000000 uV`).
+  - Sincronização e injeção de todos os módulos SeldonCore e projetos em `/data/local/tmp/seldon/`.
+  - Especificação técnica documentada em `docs/features/FEATURE_005_LIVE_AOSP_DEPLOYMENT_WORKFLOW.md`.
+
 ### Adicionado (Implementação Completa e Testes dos 3 Projetos Finais)
 - **Módulo 2 (IA Embarcada & Anomalias)**:
   - Implementação de Autoencoder neural leve com quantização pós-treinamento simétrica em INT8 (`projects/projeto_ia_anomalia/`).
