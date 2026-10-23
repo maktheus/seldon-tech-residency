@@ -60,3 +60,10 @@
 \contentsline {section}{\numberline {4.4}Revisão da Literatura e Estado da Arte em Eficiência Energética Móvel}{25}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Arquitetura de Engenharia do Projeto Final: Seldon EcoOptimizer}{26}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Especificação Técnica dos Módulos do Sistema}{26}{subsection.4.5.1}%
+\contentsline {chapter}{\numberline {5}Ambiente de Engenharia AOSP Android 15 e Política de Documentação}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Fundamentação da Árvore AOSP Android 15}{28}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}A Interface de IPC: AIDL NDK e Estabilidade VINTF}{29}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}O Daemon Nativo de Sistema (\texttt {seldond})}{29}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Confinamento de Segurança: Políticas SELinux}{30}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Política de Engenharia: Documentação Obrigatória por Feature}{30}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Roteiro de Compilação e Emulação AOSP}{31}{section.5.5}%

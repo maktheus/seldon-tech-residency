@@ -1,0 +1,2 @@
+# Mapeamento do serviço Binder Seldon Telemetry para contexto SELinux
+com.seldon.os.telemetry.ISeldonTelemetryService/default    u:object_r:seldon_telemetry_service:s0

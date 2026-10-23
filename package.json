@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "aosp:setup": "./scripts/setup_aosp_android15.sh",
+    "aosp:emulator": "./scripts/run_aosp_emulator.sh",
+    "aosp:build": "./scripts/build_seldon_aosp.sh",
+    "docs:verify": "./scripts/verify_feature_docs.sh",
+    "hooks:install": "./scripts/install_hooks.sh"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

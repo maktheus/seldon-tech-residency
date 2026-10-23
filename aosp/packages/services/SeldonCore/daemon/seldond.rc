@@ -1,0 +1,11 @@
+# ==============================================================================
+# Seldon Tech Residency - Init RC configuration for seldond
+# ==============================================================================
+
+service seldond /system/bin/seldond
+    class main
+    user system
+    group system readproc
+    capabilities SYS_NICE
+    seclabel u:r:seldond:s0
+    writepid /dev/cpuset/system-background/tasks

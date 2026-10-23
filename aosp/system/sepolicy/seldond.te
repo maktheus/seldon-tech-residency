@@ -1,0 +1,30 @@
+# ==============================================================================
+# Seldon Tech Residency - SELinux Type Enforcement for seldond
+# Target: Android 15 (VanillaIceCream / API 35)
+# ==============================================================================
+
+type seldond, domain, coredomain;
+type seldond_exec, exec_type, file_type, system_file_type;
+
+# Inicialização e transição de domínio a partir do init
+init_daemon_domain(seldond)
+
+# Suporte ao Binder IPC
+binder_use(seldond)
+binder_service(seldond)
+
+# Registro no Service Manager do Android
+add_service(seldond, seldon_telemetry_service)
+
+# Permissões de leitura no subsistema de energia e zonas térmicas
+allow seldond sysfs_batteryinfo:dir r_dir_perms;
+allow seldond sysfs_batteryinfo:file r_file_perms;
+allow seldond sysfs_thermal:dir r_dir_perms;
+allow seldond sysfs_thermal:file r_file_perms;
+
+# Permissão para logging do sistema (logcat / logd)
+read_logd(seldond)
+write_logd(seldond)
+
+# Restrição de privilégios: sem acesso de escrita em partições do sistema
+neverallow seldond system_file:file { write execute_no_trans };

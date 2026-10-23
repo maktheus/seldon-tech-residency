@@ -32,6 +32,7 @@ import { ArchitectureFlow } from './components/interactive/ArchitectureFlow';
 import { DisciplineModal } from './components/ui/DisciplineModal';
 import { QuizModal } from './components/ui/QuizModal';
 import { ProjectArchitectures } from './components/modules/ProjectArchitectures';
+import { AospEmulatorConsole } from './components/interactive/AospEmulatorConsole';
 
 export const App: React.FC = () => {
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -342,6 +343,9 @@ export const App: React.FC = () => {
             </section>
           ))}
         </div>
+
+        {/* CONSOLE DE DESENVOLVIMENTO & EMULADOR AOSP ANDROID 15 */}
+        <AospEmulatorConsole />
 
         {/* REVISÃO DA LITERATURA E ARQUITETURAS DE SOLUÇÃO DOS 3 PROJETOS FINAIS */}
         <ProjectArchitectures />

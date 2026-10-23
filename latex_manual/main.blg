@@ -5,11 +5,12 @@ A level-1 auxiliary file: capitulo1_nucleo_comum.aux
 A level-1 auxiliary file: capitulo2_ia_otimizacao.aux
 A level-1 auxiliary file: capitulo3_seguranca.aux
 A level-1 auxiliary file: capitulo4_eficiencia_energetica.aux
+A level-1 auxiliary file: capitulo5_aosp_android15.aux
 The style file: plain.bst
 Database file #1: referencias.bib
 You've used 11 entries,
             2118 wiz_defined-function locations,
-            563 strings with 6606 characters,
+            564 strings with 6634 characters,
 and the built_in function-call counts, 4784 in all, are:
 = -- 452
 > -- 277

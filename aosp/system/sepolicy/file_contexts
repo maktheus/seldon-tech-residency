@@ -1,0 +1,2 @@
+# Mapeamento do binário seldond para contexto de execução no sistema de arquivos
+/system/bin/seldond    u:object_r:seldond_exec:s0

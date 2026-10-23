@@ -1,0 +1,67 @@
+// ============================================================================
+// Copyright (C) 2026 Seldon Tech Residency Project
+// Android.bp - Soong Build Configuration for SeldonCore Telemetry Daemon
+// Target: Android 15 (VanillaIceCream / API 35)
+// ============================================================================
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+// 1. Compilação da Interface AIDL gerando backend C++ NDK e Java
+aidl_interface {
+    name: "com.seldon.os.telemetry",
+    vendor_available: false,
+    host_supported: false,
+    srcs: [
+        "aidl/com/seldon/os/telemetry/ISeldonTelemetryService.aidl",
+    ],
+    stability: "vintf",
+    backend: {
+        cpp: {
+            enabled: false,
+        },
+        java: {
+            enabled: true,
+            sdk_version: "system_current",
+        },
+        ndk: {
+            enabled: true,
+        },
+    },
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+}
+
+// 2. Compilação do Daemon Nativo C++ (seldond)
+cc_binary {
+    name: "seldond",
+    init_rc: ["seldond.rc"],
+    srcs: [
+        "main.cpp",
+        "SeldonTelemetryService.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "liblog",
+        "libutils",
+        "com.seldon.os.telemetry-V1-ndk",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-O3",
+        "-DANDROID_PLATFORM_API_35",
+    ],
+    sanitize: {
+        cfi: true,
+        scudo: true,
+        hwaddress: false,
+    },
+}
