@@ -14,7 +14,8 @@
     "docs:verify": "./scripts/verify_feature_docs.sh",
     "hooks:install": "./scripts/install_hooks.sh",
     "test:projects": "./scripts/run_all_project_tests.sh",
-    "benchmark:literature": "python3 scripts/benchmark_against_literature.py"
+    "benchmark:literature": "python3 scripts/benchmark_against_literature.py",
+    "validate:device": "python3 scripts/validate_real_device.py"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

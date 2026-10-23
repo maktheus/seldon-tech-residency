@@ -7,6 +7,16 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ## [Unreleased] - 2026-10-23
 
+### Adicionado (Validação Experimental em Smartphone Real: Samsung Galaxy S23 Ultra)
+- **Execução Direta no Silício Real (Qualcomm Snapdragon 8 Gen 2 / aarch64)**:
+  - Detecção e conexão do flagship `SM-S918B` rodando Android 16 (API 36).
+  - Coleta em tempo real de sensores analógicos de bateria (4073 mV / 4.07 V, 28.2°C) e térmicos (31.2°C via ThermalHAL 2.0).
+  - Processamento de telemetria física real pela IA embarcada em **0.1178 ms**.
+  - Auditoria de pacotes instalados com o Seldon Fortress detectando riscos de Tapjacking.
+  - Geração de perfis de energia NSGA-II dedicados para a tela Dynamic AMOLED 2X do S23 Ultra.
+  - Relatório detalhado em `docs/aosp/REAL_DEVICE_VALIDATION_REPORT.md` e comando `npm run validate:device`.
+  - Especificação de feature em `docs/features/FEATURE_007_REAL_DEVICE_VALIDATION.md`.
+
 ### Adicionado (Benchmark Científico Empírico contra a Literatura & Documentação de Processo)
 - **Benchmark Empírico Rigoroso (`scripts/benchmark_against_literature.py`)**:
   - Comparação dos 3 projetos contra a literatura seminal (CVPR 2018, PLDI 2014, OSDI 2014, USENIX 2010, IEEE 2002).

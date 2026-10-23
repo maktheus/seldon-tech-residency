@@ -72,3 +72,4 @@
 \contentsline {section}{\numberline {6.2}Módulo 2: Benchmark de IA e Quantização INT8}{32}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Módulo 3: Benchmark de Segurança e Proteção IPC}{33}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Módulo 4: Benchmark de Eficiência Energética e NSGA-II}{33}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Validação Experimental em Smartphone Real: Samsung Galaxy S23 Ultra}{33}{section.6.5}%
