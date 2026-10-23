@@ -7,6 +7,27 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ## [Unreleased] - 2026-10-23
 
+### Adicionado (Implementação Completa e Testes dos 3 Projetos Finais)
+- **Módulo 2 (IA Embarcada & Anomalias)**:
+  - Implementação de Autoencoder neural leve com quantização pós-treinamento simétrica em INT8 (`projects/projeto_ia_anomalia/`).
+  - Motor de inferência de streaming em tempo real com latência <0.5ms.
+  - Suíte de testes unitários e benchmarks passando com 100% de precisão.
+  - Especificação técnica documentada em `docs/features/FEATURE_002_IA_ANOMALY_DETECTION.md`.
+- **Módulo 3 (Segurança Móvel & Seldon Fortress)**:
+  - Framework de análise de superfície de ataque e auditoria estática de `AndroidManifest.xml` (`projects/projeto_seguranca_fortress/`).
+  - Validador de integridade IPC Binder Guard mitigando estouro de buffers, replay attacks e saturação DoS.
+  - Auditor estático de regras SELinux prevenindo escalonamento de privilégios e violações de `neverallow`.
+  - Suíte de testes unitários com simulação de ataques passando com 100% de sucesso.
+  - Especificação técnica documentada em `docs/features/FEATURE_003_SECURITY_FORTRESS.md`.
+- **Módulo 4 (Eficiência Energética & Algoritmo NSGA-II)**:
+  - Implementação canônica do algoritmo genético multiobjetivo NSGA-II com Fast Non-dominated Sorting e Crowding Distance (`projects/projeto_energia_pareto/`).
+  - Modelo de potência analítico para SoCs heterogêneos (big.LITTLE, GPU, OLED 60Hz/120Hz).
+  - Geração de perfis energéticos autônomos (ECO, BALANCED, GAMING).
+  - Suíte de testes validando axiomas de dominância de Pareto e estabilidade térmica.
+  - Especificação técnica documentada em `docs/features/FEATURE_004_ENERGY_NSGA2_OPTIMIZER.md`.
+- **Orquestrador Geral de Testes**:
+  - Script `scripts/run_all_project_tests.sh` executando as 12 suítes de testes automatizados com sucesso em menos de 0.02s.
+
 ### Adicionado (AOSP Android 15 Development Infrastructure)
 - **Infraestrutura AOSP Android 15 (VanillaIceCream / API 35)**:
   - Criação da árvore de módulos `aosp/packages/services/SeldonCore/`.
