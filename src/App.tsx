@@ -31,6 +31,7 @@ import { ThreatModelSim } from './components/interactive/ThreatModelSim';
 import { ArchitectureFlow } from './components/interactive/ArchitectureFlow';
 import { DisciplineModal } from './components/ui/DisciplineModal';
 import { QuizModal } from './components/ui/QuizModal';
+import { ProjectArchitectures } from './components/modules/ProjectArchitectures';
 
 export const App: React.FC = () => {
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -341,6 +342,9 @@ export const App: React.FC = () => {
             </section>
           ))}
         </div>
+
+        {/* REVISÃO DA LITERATURA E ARQUITETURAS DE SOLUÇÃO DOS 3 PROJETOS FINAIS */}
+        <ProjectArchitectures />
       </main>
 
       {/* Footer */}

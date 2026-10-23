@@ -31,26 +31,32 @@
 \contentsline {subsection}{\numberline {2.2.1}Detecção de Anomalias com Autoencoders Neurais}{13}{subsection.2.2.1}%
 \contentsline {section}{\numberline {2.3}IA On-device e Otimização de Modelos (20h)}{14}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Teoria Matemática da Quantização Afim (FP32 $\to $ INT8)}{14}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Aceleração em Hardware: Android NNAPI e LiteRT}{15}{subsection.2.3.2}%
-\contentsline {chapter}{\numberline {3}Módulo 3 – Trilha de Segurança de Dispositivos Móveis e Automação (75 Horas)}{16}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introdução à Cibersegurança, Modelagem de Ameaças e Vulnerabilidades (35h)}{16}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Metodologia de Modelagem de Ameaças: STRIDE}{16}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Superfícies de Ataque Críticas no Android}{16}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}AOSP – Arquitetura de Segurança Android (20h)}{17}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}A Sandbox Baseada em UID Unix}{17}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Security-Enhanced Linux (SELinux): Mandatory Access Control}{17}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Android Verified Boot (AVB 2.0) e Cadeia de Confiança}{18}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Android Keystore \& Hardware StrongBox}{18}{subsection.3.2.4}%
+\contentsline {section}{\numberline {2.4}Revisão da Literatura e Estado da Arte: IA e Observabilidade em SO}{14}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Arquitetura de Engenharia do Projeto Final: Seldon Anomaly Watcher}{15}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Especificação Técnica dos Módulos da Solução}{16}{subsection.2.5.1}%
+\contentsline {chapter}{\numberline {3}Módulo 3 – Trilha de Segurança de Dispositivos Móveis e Automação (75 Horas)}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introdução à Cibersegurança, Modelagem de Ameaças e Vulnerabilidades (35h)}{17}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Metodologia de Modelagem de Ameaças: STRIDE}{17}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Superfícies de Ataque Críticas no Android}{17}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}AOSP – Arquitetura de Segurança Android (20h)}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}A Sandbox Baseada em UID Unix}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Security-Enhanced Linux (SELinux): Mandatory Access Control}{18}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Android Keystore \& Hardware StrongBox}{19}{subsection.3.2.3}%
 \contentsline {section}{\numberline {3.3}Automação de Testes e Validações de Segurança (20h)}{19}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Integração DevSecOps Contínua}{19}{subsection.3.3.1}%
-\contentsline {chapter}{\numberline {4}Módulo 4 – Trilha de Eficiência Energética e Algoritmos de Otimização (75 Horas)}{20}{chapter.4}%
-\contentsline {section}{\numberline {4.1}AOSP – Gestão Energética da Plataforma (25h)}{20}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}O Subsistema PowerManagerService e os WakeLocks}{20}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}A Máquina de Estados do Doze Mode}{21}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Medição e Profiling Energético (25h)}{22}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Fundamentos Físicos da Potência e Energia}{22}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Instrumentação Física em Bancada com o Monsoon Power Monitor}{22}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Profiling por Software com Google Battery Historian}{22}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Modelagem e Algoritmos de Otimização (25h)}{23}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Teoria da Otimização Multiobjetivo e Fronteira de Pareto}{23}{subsection.4.3.1}%
+\contentsline {section}{\numberline {3.4}Revisão da Literatura e Estado da Arte em Cibersegurança Móvel}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Arquitetura de Engenharia do Projeto Final: Seldon SecGuard DevSecOps}{20}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Especificação Técnica dos Módulos do Sistema}{20}{subsection.3.5.1}%
+\contentsline {chapter}{\numberline {4}Módulo 4 – Trilha de Eficiência Energética e Algoritmos de Otimização (75 Horas)}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}AOSP – Gestão Energética da Plataforma (25h)}{22}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}O Subsistema PowerManagerService e os WakeLocks}{22}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}A Máquina de Estados do Doze Mode}{23}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Medição e Profiling Energético (25h)}{23}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Fundamentos Físicos da Potência e Energia}{23}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Instrumentação Física em Bancada com o Monsoon Power Monitor}{24}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Modelagem e Algoritmos de Otimização (25h)}{24}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Teoria da Otimização Multiobjetivo e Fronteira de Pareto}{24}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}O Algoritmo Genético NSGA-II}{24}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Revisão da Literatura e Estado da Arte em Eficiência Energética Móvel}{25}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Arquitetura de Engenharia do Projeto Final: Seldon EcoOptimizer}{26}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Especificação Técnica dos Módulos do Sistema}{26}{subsection.4.5.1}%

@@ -1,7 +1,7 @@
 \chapter{Módulo 2 – Trilha de IA aplicada à Otimização de Sistemas Android (75 Horas)}
 \label{chap:modulo2}
 
-A \textbf{Trilha de Inteligência Artificial aplicada à Otimização de Sistemas Android} constitui a primeira especialização avançada do programa Seldon. Nela, o foco desloca-se da aplicação para o interior do sistema operacional, explorando a fundo o \textbf{Android Open Source Project (AOSP)}. Os residentes aprendem a extrair telemetria em nanossegundos do kernel Linux e do runtime ART, modelar padrões complexos de uso com redes neurais profundas e converter esses modelos em artefatos quantizados ultracompactos capazes de rodar em tempo real na NPU do dispositivo móvel com baixíssimo impacto energético.
+A \textbf{Trilha de Inteligência Artificial aplicada à Otimização de Sistemas Android} explora o coração do sistema operacional, focando no \textbf{Android Open Source Project (AOSP)}. Os residentes aprendem a extrair telemetria em nanossegundos do kernel Linux e do runtime ART, modelar padrões complexos de uso com redes neurais profundas e converter esses modelos em artefatos quantizados ultracompactos capazes de rodar em tempo real na NPU do dispositivo móvel com baixíssimo impacto energético.
 
 ---
 
@@ -59,7 +59,7 @@ Capacitar os residentes a projetar, treinar e validar redes neurais profundas ap
 \end{pedagogico}
 
 \subsection{Detecção de Anomalias com Autoencoders Neurais}
-Uma das aplicações mais nobres de IA no AOSP é detectar quando um aplicativo entra em um estado anômalo de dreno silencioso de bateria ou vazamento de recursos. Para tal, treina-se um **Autoencoder** exclusivamente com dados de operação nominal:
+Uma das aplicações de IA no AOSP é detectar quando um aplicativo entra em um estado anômalo de dreno silencioso de bateria ou vazamento de recursos. Para tal, treina-se um **Autoencoder** exclusivamente com dados de operação nominal:
 
 \begin{equation}
     \mathbf{z} = \sigma(\mathbf{W}_e \mathbf{x} + \mathbf{b}_e) \quad \text{(Codificador)}
@@ -71,8 +71,6 @@ onde $\mathbf{x} \in \mathbb{R}^d$ é o vetor de métricas instantâneas (uso de
 \begin{equation}
     \text{MSE}(\mathbf{x}, \hat{\mathbf{x}}) = \frac{1}{d} \sum_{j=1}^{d} (x_j - \hat{x}_j)^2
 \end{equation}
-
-Quando o dispositivo opera em regime normal, o erro de reconstrução permanece abaixo de um limiar $\tau$. Se um aplicativo defeituoso iniciar um loop infinito ou adquirir um \textit{WakeLock} fantasma, o vetor de entrada $\mathbf{x}_{\text{anomalo}}$ diverte da distribuição aprendida, fazendo $\text{MSE} \gg \tau$ e disparando o alerta preventivo antes do esgotamento da bateria.
 
 ---
 
@@ -90,39 +88,57 @@ Dominar as técnicas de engenharia para adaptação de modelos neurais em dispos
 \label{fig:quantizacao_img}
 \end{figure}
 
-Modelos neurais convencionais operam com tensores em ponto flutuante de precisão simples (\texttt{Float32}, ocupando 4 bytes por parâmetro). Em smartphones, essa representação é onerosa: consome banda excessiva de memória RAM e dissipa calor desnecessário.
+Modelos neurais convencionais operam com tensores em ponto flutuante de precisão simples (\texttt{Float32}, ocupando 4 bytes por parâmetro). Em smartphones, essa representação consome banda excessiva de memória RAM e dissipa calor desnecessário.
 
 A **Quantização Afim de Inteiros (Uniform Affine Quantization)** mapeia um valor real contínuo $r \in [\alpha, \beta]$ em um inteiro de 8 bits $q \in [-128, 127]$ através da relação linear:
 \begin{equation}
     r \approx S \cdot (q - Z)
 \end{equation}
-onde:
+onde $S = \frac{\beta - \alpha}{255}$ é o fator de escala e $Z = \text{round}\left( -\frac{\alpha}{S} \right) + q_{\text{min}}$ é o ponto zero.
+
+---
+
+\section{Revisão da Literatura e Estado da Arte: IA e Observabilidade em SO}
+
+A literatura científica recente converge para a necessidade de observabilidade profunda com overhead desprezível e inferência inteligente descentralizada:
 \begin{itemize}
-    \item $S \in \mathbb{R}^+$ é o fator de escala (\textit{Scale Factor}), dado por:
-    \begin{equation}
-        S = \frac{\beta - \alpha}{q_{\text{max}} - q_{\text{min}}} = \frac{\beta - \alpha}{255}
-    \end{equation}
-    \item $Z \in \mathbb{Z}$ é o ponto zero (\textit{Zero-Point}), garantindo que o valor real $0{,}0$ seja representado exatamente por um número inteiro sem viés numérico:
-    \begin{equation}
-        Z = \text{round}\left( -\frac{\alpha}{S} \right) + q_{\text{min}}
-    \end{equation}
+    \item \textbf{Observabilidade em Kernel e Sistemas Operacionais:} \cite{gregg2019bpf} demonstra que ferramentas tradicionais baseadas em amostragem periódica de \texttt{/proc} introduzem distorções severas de amostragem (\textit{observer effect}). O uso de pontos de rastreamento estáticos (\textit{tracepoints}) e buffers circulares sem bloqueio no kernel Linux — como implementado no Perfetto — viabiliza capturar eventos em nanossegundos com consumo de CPU inferior a $1{,}5\%$.
+    \item \textbf{Detecção Não-Supervisionada de Anomalias em Telemetria:} \cite{malhotra2016lstm} e \cite{zhou2017anomaly} comprovaram que redes neurais autoassociativas (Autoencoders e LSTM Encoder-Decoders) superam métodos estatísticos clássicos (como limites baseados em desvio padrão $\mu \pm 3\sigma$) na detecção de falhas silenciosas em séries temporais multidimensionais, pois aprendem correlações intrínsecas e não-lineares entre subsistemas heterogêneos.
+    \item \textbf{Quantização com Aritmética de Inteiros Acelerada:} O trabalho seminal de \cite{jacob2018quantization} estabeleceu as bases formais da quantização afim adotada pelo Google no ecossistema Android/LiteRT, comprovando que a substituição de instruções de ponto flutuante por aritmética de inteiros INT8 com multiplicadores de ponto fixo reduz em $75\%$ o consumo de largura de banda de memória e acelera em mais de $4\times$ a execução em aceleradores de hardware como NPUs e DSPs, preservando mais de $99\%$ da acurácia original de redes complexas como MobileNet.
 \end{itemize}
 
-O mapeamento de quantização direto é formalizado por:
-\begin{equation}
-    q = \text{clip}\left( \text{round}\left( \frac{r}{S} \right) + Z, \ q_{\text{min}}, \ q_{\text{max}} \right)
-\end{equation}
+---
 
-\begin{casopratico}{Caso Prático: Quantização de Modelo de Visão MobileNet}
-\textbf{Estado Inicial (FP32):} Tamanho do arquivo: $16{,}4\text{ MB}$. Latência de inferência em CPU: $82\text{ ms}$. Consumo energético por frame: $1{,}82\text{ mWh}$.\\
-\textbf{Após Post-Training Full Integer Quantization (INT8):}
-\begin{itemize}
-    \item Tamanho reduzido para $4{,}1\text{ MB}$ (redução exata de $75\%$ na ocupação de memória Flash e RAM);
-    \item Latência reduzida para $18\text{ ms}$ quando delegado para a NPU via driver Android NNAPI;
-    \item Consumo energético caiu para $0{,}41\text{ mWh}$ por inferência;
-    \item Perda de acurácia Top-1 insignificante: apenas $0{,}3\%$ de degradação em relação ao baseline FP32.
-\end{itemize}
-\end{casopratico}
+\section{Arquitetura de Engenharia do Projeto Final: Seldon Anomaly Watcher}
 
-\subsection{Aceleração em Hardware: Android NNAPI e LiteRT}
-O runtime LiteRT (TensorFlow Lite) compila o grafo quantizado em formato FlatBuffers (\texttt{.tflite}). Durante a execução, ele consulta a HAL da \textbf{NNAPI (Neural Networks API)}, que roteia a multiplicação de matrizes inteiras diretamente para as unidades vetoriais dedicadas do silício (NPU Snapdragon, Hexagon DSP ou MediaTek APU), contornando as CPUs convencionais e poupando preciosos ciclos de clock.
+Como projeto final de conclusão do Módulo 2, os residentes projetam e implementam o **Seldon Anomaly Watcher**, uma solução completa de governança inteligente embarcada no AOSP.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_arq_projeto_ia.png}
+\caption{Arquitetura de Engenharia do Projeto Final (Módulo 2): Pipeline completo desde a captura de telemetria no kernel via Perfetto até a inferência quantizada em NPU e atuação corretiva no System Server.}
+\label{fig:arq_ia_projeto}
+\end{figure}
+
+\subsection{Especificação Técnica dos Módulos da Solução}
+A arquitetura estrutura-se em três subsistemas desacoplados:
+\begin{enumerate}
+    \item \textbf{Coletor de Telemetria de Baixo Nível (Kernel Probe):}
+    \begin{itemize}
+        \item Consome dados de \texttt{tracefs} e eventos \texttt{sched\_switch}, calculando a duração das fatias de tempo (\textit{timeslices}) de cada thread em execução;
+        \item Monitora transações no driver \texttt{/dev/binder}, registrando tempos de espera síncronos e tamanho dos buffers transmitidos;
+        \item Grava vetores de atributos em janelas deslizantes de $500\text{ ms}$ em memória compartilhada (\textit{ashmem}).
+    \end{itemize}
+    \item \textbf{Engine de Inferência On-Device (LiteRT + NNAPI):}
+    \begin{itemize}
+        \item Executa o modelo Autoencoder Convolucional 1D quantizado em INT8 (\texttt{anomaly\_detector\_v2.tflite});
+        \item Delegado via driver Android NNAPI diretamente para a NPU do chipset;
+        \item Computa o erro de reconstrução instantâneo $\text{MSE}_t$; se $\text{MSE}_t > \tau_{\text{critico}}$, dispara um evento de anomalia estruturado.
+    \end{itemize}
+    \item \textbf{Atuador Proativo de Políticas AOSP (System Server Handler):}
+    \begin{itemize}
+        \item Recebe o alerta via interface AIDL \texttt{ISeldonPolicyCallback};
+        \item Reclassifica preventivamente a prioridade de agendamento de threads com risco de jank de \texttt{SCHED\_OTHER} para \texttt{SCHED\_FIFO};
+        \item Notifica o \texttt{ActivityManagerService} para contenção de tarefas em segundo plano causadoras de concorrência excessiva de locks.
+    \end{itemize}
+\end{enumerate}

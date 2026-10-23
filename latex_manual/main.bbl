@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+
+\bibitem{arzt2014flowdroid}
+Steven Arzt, Siegfried Rasthofer, Christian Fritz, Eric Bodden, Alexandre
+  Bartel, Jacques Klein, Yves~Le Traon, Damien Octeau, and Patrick McDaniel.
+\newblock Flowdroid: Precise context, flow, field, object-sensitive and
+  lifecycle-aware taint analysis for android apps.
+\newblock In {\em ACM SIGPLAN Conference on Programming Language Design and
+  Implementation (PLDI)}, pages 259--269, 2014.
+
+\bibitem{carroll2010analysis}
+Aaron Carroll and Gernot Heiser.
+\newblock An analysis of power consumption in a smartphone.
+\newblock {\em USENIX Annual Technical Conference (ATC)}, pages 1--14, 2010.
+
+\bibitem{deb2002fast}
+Kalyanmoy Deb, Amrit Pratap, Sameer Agarwal, and T.~Meyarivan.
+\newblock A fast and elitist multiobjective genetic algorithm: Nsga-ii.
+\newblock {\em IEEE Transactions on Evolutionary Computation}, 6(2):182--197,
+  2002.
+
+\bibitem{enck2014taintdroid}
+William Enck, Peter Gilbert, Byung-Gon Chun, Landon~P. Cox, Jaeyeon Jung,
+  Patrick McDaniel, and Anmol~N. Sheth.
+\newblock Taintdroid: An information-flow tracking system for realtime privacy
+  monitoring on smartphones.
+\newblock In {\em USENIX Symposium on Operating Systems Design and
+  Implementation (OSDI)}, pages 393--407, 2014.
+
+\bibitem{gregg2019bpf}
+Brendan Gregg.
+\newblock {\em BPF Performance Tools: Deep Analysis and Mobile/Server
+  Observability}.
+\newblock Addison-Wesley Professional, 2019.
+
+\bibitem{jacob2018quantization}
+Benoit Jacob, Skirmantas Kligys, Bo~Chen, Menglong Zhu, Matthew Tang, Andrew
+  Howard, Hartwig Adam, and Dmitry Kalenichenko.
+\newblock Quantization and training of neural networks for efficient
+  integer-arithmetic-only inference.
+\newblock {\em IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, pages 2704--2713, 2018.
+
+\bibitem{malhotra2016lstm}
+Pankaj Malhotra, Anusuya Saha, Vishnu TV, Lovekesh Vig, Puneet Agarwal, and
+  Gautam Shroff.
+\newblock Lstm-based encoder-decoder for multi-sensor anomaly detection.
+\newblock In {\em ICML Workshop on Anomaly Detection}, 2016.
+
+\bibitem{pathak2012energy}
+Abhinav Pathak, Y.~Charlie Hu, and Ming Zhang.
+\newblock Where is the energy spent inside my app? fine grained energy
+  accounting on smartphones with eprof.
+\newblock In {\em EuroSys European Conference on Computer Systems}, pages
+  29--42, 2012.
+
+\bibitem{rosen2015discovering}
+Sanae Rosen, Zhiyun Qian, Qi~Alfred Chen, Z.~Morley Mao, and Jie Hui.
+\newblock Discovering fine-grained energy drain on smartphones through battery
+  history.
+\newblock {\em ACM Transactions on Computer Systems (TOCS)}, 2015.
+
+\bibitem{smalley2013security}
+Stephen Smalley and Robert Craig.
+\newblock Security enhanced (se) android: Bringing flexible mac to android.
+\newblock In {\em Network and Distributed System Security Symposium (NDSS)},
+  2013.
+
+\bibitem{zhou2017anomaly}
+Chong Zhou and Randy~C. Paffenroth.
+\newblock Anomaly detection with robust deep autoencoders.
+\newblock {\em ACM SIGKDD International Conference on Knowledge Discovery and
+  Data Mining}, pages 665--674, 2017.
+
+\end{thebibliography}

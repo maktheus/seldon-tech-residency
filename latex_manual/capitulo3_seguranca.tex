@@ -36,21 +36,8 @@ O framework STRIDE, desenvolvido originalmente pela Microsoft e amplamente adota
 Diferente de sistemas desktop, o Android expõe pontos de entrada específicos via IPC:
 \begin{itemize}
     \item \textbf{Exported Components Inseguros:} Declarar \texttt{android:exported="true"} em Activities, Services ou Receivers sem exigir \texttt{android:permission} permite que qualquer outro aplicativo instalado acione essas classes com dados arbitrários;
-    \item \textbf{SQL Injection em Content Providers:} Falha na parametrização de cláusulas \texttt{selection} no método \texttt{query()}, permitindo a extração de dados confidenciais do SQLite local:
+    \item \textbf{SQL Injection em Content Providers:} Falha na parametrização de cláusulas \texttt{selection} no método \texttt{query()}, permitindo a extração de dados confidenciais do SQLite local.
 \end{itemize}
-
-\begin{lstlisting}[language=Java, caption={Exemplo de Hardening em Content Provider com Permission Signature}]
-<!-- AndroidManifest.xml: Definicao de permissao restrita -->
-<permission 
-    android:name="com.seldon.sec.READ_TELEMETRY"
-    android:protectionLevel="signature" />
-
-<provider
-    android:name=".provider.TelemetryVaultProvider"
-    android:authorities="com.seldon.sec.provider"
-    android:exported="true"
-    android:readPermission="com.seldon.sec.READ_TELEMETRY" />
-\end{lstlisting}
 
 ---
 
@@ -82,15 +69,6 @@ A proteção por UID (\textit{Discretionary Access Control - DAC}) é insuficien
         \texttt{allow <origem> <destino>:<classe> \{ <permissões> \};}
     \end{equation}
 \end{itemize}
-Mesmo que um invasor obtenha root dentro do domínio \texttt{untrusted\_app}, o SELinux bloqueará qualquer tentativa de carregar módulos de kernel ou acessar nós de dispositivo não autorizados.
-
-\subsection{Android Verified Boot (AVB 2.0) e Cadeia de Confiança}
-O Verified Boot garante que nenhum código do sistema operacional tenha sido modificado:
-\begin{enumerate}
-    \item \textbf{Raiz de Confiança (Root of Trust):} Chave pública gravada fisicamente em fusíveis eletrônicos da ROM do processador (eFuses);
-    \item \textbf{Cadeia Criptográfica:} A ROM de boot valida a assinatura do Bootloader, que valida a imagem de kernel (\texttt{boot.img}), que por sua vez valida a tabela de dispersão (\textit{hash tree}) do subsistema \texttt{dm-verity} das partições \texttt{system} e \texttt{vendor};
-    \item \textbf{dm-verity:} Módulo de kernel que calcula o hash SHA-256 de cada bloco de disco de 4 KB sob demanda durante a leitura. Se um único byte for adulterado, o bloco é rejeitado e o kernel impede a inicialização.
-\end{enumerate}
 
 \subsection{Android Keystore \& Hardware StrongBox}
 Para proteger chaves criptográficas mestras, o Android disponibiliza a camada do **Android Keystore**:
@@ -98,24 +76,6 @@ Para proteger chaves criptográficas mestras, o Android disponibiliza a camada d
     \item As chaves são geradas e operadas diretamente em um ambiente de execução confiável (\textit{Trusted Execution Environment - TEE / ARM TrustZone});
     \item O padrão mais elevado de proteção é o **StrongBox**: um chip de silício totalmente separado do SoC principal, com sua própria CPU, RAM e armazenamento resistente a violação física (\textit{tamper-resistant}).
 \end{itemize}
-
-\begin{lstlisting}[language=Java, caption={Geração de Chave AES-256 no Hardware StrongBox}]
-val keyGenSpec = KeyGenParameterSpec.Builder(
-    "SeldonMasterKey",
-    KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-)
-    .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-    .setUserAuthenticationRequired(true) // Exige biometria
-    .setIsStrongBoxBacked(true)         // Aloca em chip Secure Element
-    .build()
-
-val keyGenerator = KeyGenerator.getInstance(
-    KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore"
-)
-keyGenerator.init(keyGenSpec)
-keyGenerator.generateKey()
-\end{lstlisting}
 
 ---
 
@@ -128,11 +88,56 @@ Capacitar os residentes na construção de ferramentas automatizadas para audito
 \subsection{Integração DevSecOps Contínua}
 A automação de testes de segurança busca eliminar vulnerabilidades ainda na fase de desenvolvimento (estratégia \textit{Shift-Left}):
 \begin{itemize}
-    \item Scripts em Python integrados à pipeline CI que decompilam o arquivo \texttt{AndroidManifest.xml} compilado via \texttt{aapt2} e verificam flags de risco:
-    \begin{itemize}
-        \item \texttt{android:debuggable="false"} obrigatório em builds de Release;
-        \item \texttt{android:allowBackup="false"} para evitar extrações via \texttt{adb backup};
-        \item \texttt{android:usesCleartextTraffic="false"} para impedir tráfego HTTP sem TLS 1.3.
-    \end{itemize}
+    \item Scripts em Python integrados à pipeline CI que decompilam o arquivo \texttt{AndroidManifest.xml} compilado via \texttt{aapt2};
     \item Fuzzing automatizado de interfaces AIDL com geração estocástica de entradas malformadas para verificar resiliência a travamentos no AOSP.
 \end{itemize}
+
+---
+
+\section{Revisão da Literatura e Estado da Arte em Cibersegurança Móvel}
+
+A segurança no ecossistema Android foi amplamente investigada pela comunidade científica:
+\begin{itemize}
+    \item \textbf{Análise de Fluxo de Dados e Rastreamento de Privilégios:} Os trabalhos seminais de \cite{enck2014taintdroid} introduziram o rastreamento dinâmico de dados contaminados (\textit{dynamic taint tracking}) na máquina virtual Dalvik/ART, expondo que mais da metade das aplicações comerciais vazava identificadores de hardware sem autorização explícita. Subsequentemente, \cite{arzt2014flowdroid} estabeleceram o padrão de ouro em análise estática sensível ao contexto e ao ciclo de vida do Android (\textit{FlowDroid}), provando que a modelagem precisa do ciclo de vida das Activities é essencial para detectar caminhos de vazamento com taxas mínimas de falsos positivos.
+    \item \textbf{Controle de Acesso Mandatório Flexível (SEAndroid):} \cite{smalley2013security} formalizaram a integração do SELinux ao ecossistema AOSP (SEAndroid), demonstrando que a imposição de regras de confinamento estrito (\textit{type enforcement}) no kernel neutraliza mais de $90\%$ dos exploits de escalação de privilégios e impede que vulnerabilidades em Daemons com permissões de root alcancem o subsistema de rádio ou o armazenamento protegido.
+    \item \textbf{Defesa Criptográfica Respaldada em Hardware:} Relatórios de conformidade e pesquisas recentes da indústria de chips móveis consolidaram o modelo de separação física através de Secure Elements dedicados (StrongBox Keymint), demonstrando imunidade a ataques de canal lateral (\textit{side-channel attacks}) e extrações de memória física mesmo em cenários de quebra total da segurança do Kernel Linux.
+\end{itemize}
+
+---
+
+\section{Arquitetura de Engenharia do Projeto Final: Seldon SecGuard DevSecOps}
+
+Como projeto prático da Trilha de Segurança, os residentes constroem a plataforma **Seldon SecGuard DevSecOps**, um sistema completo e automatizado para auditoria de conformidade e testes de robustez no AOSP.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_arq_projeto_seguranca.png}
+\caption{Arquitetura de Engenharia do Projeto Final (Módulo 3): Esteira DevSecOps integrada compreendendo análise estática SAST, fuzzer de transações AIDL, verificador de políticas SELinux e auditoria de chaves em hardware StrongBox.}
+\label{fig:arq_seguranca_projeto}
+\end{figure}
+
+\subsection{Especificação Técnica dos Módulos do Sistema}
+A esteira automatizada executa em quatro estágios sequenciais com portões de qualidade (\textit{Quality Gates}):
+\begin{enumerate}
+    \item \textbf{Motor SAST de Inspeção de Manifestos e Bytecode:}
+    \begin{itemize}
+        \item Desempacota APKs e decompila o manifesto binário via \texttt{aapt2} e \texttt{baksmali};
+        \item Identifica componentes com \texttt{android:exported="true"} sem proteção de permissão (\textit{zero-permission exposure});
+        \item Valida se a flag \texttt{cleartextTrafficPermitted} está estritamente desativada e verifica o arquivo \texttt{network\_security\_config.xml}.
+    \end{itemize}
+    \item \textbf{Módulo de Fuzzing de Transações IPC Binder (AIDL Fuzzer):}
+    \begin{itemize}
+        \item Intercepta chamadas em serviços de sistema e injeta vetores de teste estocásticos com parâmetros fora dos limites aceitáveis (\textit{boundary mutations});
+        \item Monitora respostas do kernel e verifica a ocorrência de \texttt{Kernel Panics} ou \texttt{Fatal Signal 11 (SIGSEGV)} no logcat de eventos.
+    \end{itemize}
+    \item \textbf{Auditor de Políticas SELinux e Cadeia de Confiança AVB:}
+    \begin{itemize}
+        \item Inspeciona os arquivos de política \texttt{.te} compilados no firmware (\texttt{sepolicy}), garantindo ausência de diretivas permissivas desnecessárias;
+        \item Checa a integridade da partição \texttt{system} via tabela de dispersão do \texttt{dm-verity}.
+    \end{itemize}
+    \item \textbf{Verificador de Armazenamento Criptográfico StrongBox:}
+    \begin{itemize}
+        \item Executa suíte de testes de validação no Android Keystore, assegurando que o algoritmo de geração de chaves declare \texttt{setIsStrongBoxBacked(true)};
+        \item Emite o Relatório Técnico de Rastreabilidade em formato SARIF/PDF com certificação de conformidade para produção.
+    \end{itemize}
+\end{enumerate}
