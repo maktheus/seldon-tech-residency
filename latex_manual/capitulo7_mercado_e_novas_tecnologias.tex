@@ -1,0 +1,83 @@
+\chapter{Fronteiras Tecnológicas, Ecossistema Open Source \& Análise de Mercado}
+\label{chap:mercado_novas_tecnologias}
+
+\begin{pedagogico}{Visão Estratégica \& Inovação Aberta}
+Este capítulo consolida o levantamento de tecnologias emergentes no ecossistema Android Open Source Project (AOSP), analisando repositórios seminais da comunidade global (NimBLE, Netsim, Rust in Android, ExecuTorch) e estabelece o dimensionamento de mercado (TAM/SAM/SOM), público-alvo, modelos de monetização e mecanismos de fomento à P\&D no Brasil sob a Lei de Informática.
+\end{pedagogico}
+
+\section{Levantamento de Novas Tecnologias \& Repositórios no GitHub}
+
+A evolução da engenharia de sistemas operacionais móveis é impulsionada pela convergência entre segurança de memória, virtualização de rádio e aceleração neural nativa.
+
+\subsection{Apache NimBLE e Netsim (nimble\_bridge)}
+O componente \texttt{nimble\_bridge}, identificado no ecossistema de emulação oficial do Google Android (\texttt{prebuilts/android-emulator}), baseia-se no \textbf{Apache NimBLE} --- uma pilha de protocolo Bluetooth Low Energy (BLE) ultraleve, originalmente concebida para sistemas operacionais de tempo real (Apache Mynewt). 
+
+No AOSP, o Google integrou o NimBLE ao projeto \textbf{Netsim} (disponível no GitHub e no repositório AOSP \texttt{tools/netsim}). O Netsim virtualiza controladores de rádio BLE, Wi-Fi 802.11 e Ultra-Wideband (UWB) no espaço de usuário do host:
+\begin{itemize}
+    \item Permite que múltiplos emuladores ou nós em nuvem descubram-se mutualmente por pacotes BLE e beacons sem necessidade de hardware físico.
+    \item Suporta roteamento de pacotes HCI em tempo real através de soquetes locais UNIX, reduzindo em 90\% o tempo de testes de proximidade e emparelhamento.
+    \item Elimina a dependência de drivers proprietários de Bluetooth em pipelines de integração contínua (CI/CD).
+\end{itemize}
+
+\subsection{Transição para Rust no Código Nativo do AOSP}
+Historicamente, mais de 70\% de todas as vulnerabilidades de segurança graves reportadas no Android decorriam de violações de segurança de memória em C/C++ (\textit{use-after-free}, estouro de buffer, corridas de ponteiro). A partir do Android 12 e consolidado no Android 15:
+\begin{itemize}
+    \item Mais de 1,5 milhão de linhas de código em serviços críticos do sistema (pilha Bluetooth Keystore2, DNS, libbinder\_rs, Ultra-Wideband) foram migradas para Rust.
+    \item O compilador Rust do Android Toolchain garante segurança de tipos e posse (\textit{borrow checker}) em tempo de compilação com sobrecarga de execução nula.
+    \item Recomenda-se para as próximas iterações do \texttt{seldond} a implementação do stub AIDL com o backend \texttt{aidl\_interface \{ backend: \{ rust: \{ enabled: true \} \} \}}.
+\end{itemize}
+
+\subsection{ExecuTorch (Meta) e LiteRT (Google)}
+A inferência de IA on-device migrou do tradicional TensorFlow Lite para ambientes modulares e com ligação direta às NPUs:
+\begin{itemize}
+    \item \textbf{Meta ExecuTorch:} Runtime leve focado em modelos generativos e difusão diretamente em chips Snapdragon NPU e MediaTek APU, desacoplado de bibliotecas Python.
+    \item \textbf{Google LiteRT (Runtime for On-Device AI):} Nova geração do ecossistema de IA do Google para Android 15/16, unificando pipelines de quantização INT4/INT8 com compilação JIT via OpenXLA.
+\end{itemize}
+
+\section{Dimensionamento Comercial do Mercado Global (TAM, SAM e SOM)}
+
+As disciplinas e projetos desenvolvidos no programa Seldon inserem-se diretamente em mercados tecnológicos de altíssimo crescimento e alta demanda por especialistas:
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Dimensionamento do Mercado Global (TAM, SAM e CAGR 2026--2031)}
+\label{tab:tam_sam}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Segmento de Mercado} & \textbf{TAM (2026)} & \textbf{TAM Previsto (2030/31)} & \textbf{CAGR} & \textbf{Drivers Principais} \\ \hline
+\textbf{Edge AI / On-Device ML} & US\$ 30,5 bi & US\$ 85,0 bi (2030) & 36,9\% & LLMs On-Device, Privacidade, NPU \\ \hline
+\textbf{Mobile Cibersegurança} & US\$ 14,8 bi & US\$ 28,5 bi (2031) & 14,0\% & Fraudes Bancárias, Zero-Day, Spyware \\ \hline
+\textbf{Android Automotive (AAOS)} & US\$ 8,2 bi & US\$ 18,2 bi (2029) & 17,2\% & Veículos Elétricos Conectados, ADAS \\ \hline
+\textbf{Otimização Baterias/IoT} & US\$ 4,5 bi & US\$ 11,3 bi (2030) & 20,1\% & Wearables, ESG, Duração de Carga \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{casopratico}{O Mercado Endereçável do Seldon (SOM)}
+O \textbf{Serviceable Obtainable Market (SOM)} foca nos centros de excelência em P\&D móvel, fabricantes de smartphones instalados no Brasil e grandes corporações financeiras, estimado em \textbf{US\$ 380 milhões anuais} em contratos de serviços tecnológicos especializados e licenciamento de firmware customizado.
+\end{casopratico}
+
+\section{Público-Alvo, Clientes e Proposta de Valor Comercial}
+
+O ecossistema Seldon atende a quatro classes fundamentais de clientes corporativos:
+
+\begin{enumerate}
+    \item \textbf{Fabricantes de Smartphones (OEMs):} Empresas como Samsung, Motorola/Lenovo e Xiaomi, que necessitam customizar o AOSP, homologar drivers de rádio (RIL, BLE) e diferenciar-se em autonomia de bateria.
+    \item \textbf{Fabricantes de Silício e SoCs:} Qualcomm (Snapdragon), MediaTek (Dimensity) e Google Tensor, que necessitam de BSPs (\textit{Board Support Packages}) otimizados e suporte a NPUs.
+    \item \textbf{Indústria Automotiva e Concessionárias:} Fabricantes com Android Automotive OS integrado ao cockpit (ex.: Volvo, Stellantis, GM, BYD), onde estabilidade de HAL e controle de consumo no modo repouso são requisitos vitais de segurança veicular (ISO 26262).
+    \item \textbf{Instituições Financeiras e Fintechs:} Bancos (Nubank, Itaú, Bradesco) que exigem proteção ativa contra trojans de sobreposição de tela (\textit{tapjacking}) e inspeção de IPC contra interceptação de tokens biométricos.
+\end{enumerate}
+
+\section{Oportunidades Estratégicas no Brasil: A Lei de Informática}
+
+O Brasil dispõe de um modelo de fomento à inovação de alta relevância internacional: a \textbf{Lei de Informática (Lei nº 8.248/91 e legislação complementar no Polo Industrial de Manaus - SUFRAMA)}:
+
+\begin{atencao}
+A legislação brasileira exige que empresas de tecnologia que usufruam de incentivos fiscais sobre produtos eletrônicos (smartphones, computadores e tablets) invistam obrigatoriamente no mínimo \textbf{4\% a 5\% do seu faturamento bruto} no mercado nacional em projetos de Pesquisa, Desenvolvimento e Inovação (P\&D).
+\end{atencao}
+
+\begin{itemize}
+    \item \textbf{Captação de Recursos em P\&D:} Empresas de manufatura móvel (Samsung em Campinas e Manaus, Motorola em Jaguariúna) investem centenas de milhões de reais anualmente em Institutos de Ciência e Tecnologia (ICTs) credenciados (como Sidia, Instituto Eldorado, CESAR, Visiovox e polos universitários).
+    \item \textbf{Enquadramento do Projeto Seldon:} O desenvolvimento de algoritmos de inteligência artificial de baixa potência, frameworks nativos de segurança AOSP e algoritmos multiobjetivo de eficiência energética cumpre todos os critérios de \textbf{P\&D de Relevância Nacional}, elegíveis para financiamento integral com recursos incentivados.
+    \item \textbf{Formação de Capital Humano:} A escassez de engenheiros com conhecimento profundo na árvore interna do Android (Kernel Linux GKI, C++, Rust, AIDL e HAL) torna os egressos do programa Seldon profissionais de alta cotação mercadológica no Brasil e no exterior.
+\end{itemize}

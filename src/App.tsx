@@ -34,6 +34,7 @@ import { QuizModal } from './components/ui/QuizModal';
 import { ProjectArchitectures } from './components/modules/ProjectArchitectures';
 import { AospEmulatorConsole } from './components/interactive/AospEmulatorConsole';
 import { LiteratureBenchmarkDashboard } from './components/interactive/LiteratureBenchmarkDashboard';
+import { MarketRoadmapView } from './components/interactive/MarketRoadmapView';
 
 export const App: React.FC = () => {
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -353,6 +354,9 @@ export const App: React.FC = () => {
 
         {/* BENCHMARK EMPÍRICO RIGOROSO COM A LITERATURA CIENTÍFICA */}
         <LiteratureBenchmarkDashboard />
+
+        {/* LEVANTAMENTO DE MELHORIAS (NIMBLE/NETSIM/RUST) E ESTUDO DE MERCADO COMERCIAL */}
+        <MarketRoadmapView />
       </main>
 
       {/* Footer */}

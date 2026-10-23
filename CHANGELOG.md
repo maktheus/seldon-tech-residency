@@ -7,6 +7,18 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ## [Unreleased] - 2026-10-23
 
+### Adicionado (Estudo de Novas Tecnologias: NimBLE, Rust, ExecuTorch e Análise de Mercado Global)
+- **Mapeamento de Repositórios Seminais no GitHub & Tecnologias Emergentes**:
+  - Investigação do papel do Apache NimBLE e `nimble_bridge` na virtualização de BLE/Netsim no AOSP.
+  - Análise da migração para Rust no AOSP para eliminação de 80% das falhas de segurança de memória.
+  - Integração com runtimes de ponta: Meta ExecuTorch e Google LiteRT para aceleração de NPU.
+- **Levantamento Comercial, Clientes-Alvo e Dimensionamento de Mercado (TAM/SAM)**:
+  - Mapeamento das 5 verticais de clientes: OEMs (Samsung, Motorola), SoCs (Qualcomm Snapdragon), Android Automotive (AAOS), Fintechs/Bancos e Telecom 5G.
+  - Dimensionamento do mercado global de Edge AI ($30 a $85 Bilhões até 2030, 36.9% CAGR) e Cibersegurança Móvel ($28.5 Bilhões).
+  - Análise estratégica de financiamento via Lei de Informática no Brasil (Polo Industrial de Manaus / Embrapii).
+  - Relatório técnico detalhado em `docs/aosp/TECH_IMPROVEMENTS_AND_MARKET_ANALYSIS.md`.
+  - Especificação de feature aprovada em `docs/features/FEATURE_008_BENCHMARK_IMPROVEMENTS_AND_MARKET_STUDY.md`.
+
 ### Adicionado (Validação Experimental em Smartphone Real: Samsung Galaxy S23 Ultra)
 - **Execução Direta no Silício Real (Qualcomm Snapdragon 8 Gen 2 / aarch64)**:
   - Detecção e conexão do flagship `SM-S918B` rodando Android 16 (API 36).

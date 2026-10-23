@@ -1,75 +1,83 @@
 \babel@toc {brazilian}{}\relax 
-\contentsline {chapter}{\numberline {1}Módulo 1 – Núcleo Comum de Formação (210 Horas)}{3}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Dados, Experimentação e Metodologia Científica (30h)}{3}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Formulação de Problemas Tecnológicos e Hipóteses}{3}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Desenho Experimental e Variáveis de Controle}{4}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3}Análise Estatística Inferencial: Teste $t$ de Student e ANOVA}{4}{subsection.1.1.3}%
-\contentsline {section}{\numberline {1.2}Engenharia de Software, Requisitos e Gestão do Desenvolvimento (24h)}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Engenharia de Requisitos Funcionais e Não Funcionais}{5}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Matriz de Rastreabilidade de Requisitos (RTM)}{5}{subsection.1.2.2}%
-\contentsline {section}{\numberline {1.3}Metodologia de Projetos, Ética e Habilidades Profissionais (30h)}{6}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Aprendizagem Baseada em Projetos (PBL) na Residência}{6}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Governança de Dados e Conformidade com a LGPD}{6}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}Arquitetura de Software (18h)}{6}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Clean Architecture no Ecossistema Android}{7}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Implementação Prática: UseCase Puro com Kotlin}{7}{subsection.1.4.2}%
-\contentsline {section}{\numberline {1.5}Inteligência Artificial: Fundamentos, Frameworks e Aplicações (36h)}{8}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}O Pipeline Clássico de Aprendizado Supervisionado}{8}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Matriz de Confusão e Métricas de Validação Rigorosas}{8}{subsection.1.5.2}%
-\contentsline {section}{\numberline {1.6}Programação Java/Kotlin e Desenvolvimento de Aplicações Android (42h)}{8}{section.1.6}%
-\contentsline {subsection}{\numberline {1.6.1}Os Quatro Componentes Canônicos do AOSP}{8}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}Interface Reativa com Jetpack Compose e StateFlow}{9}{subsection.1.6.2}%
-\contentsline {section}{\numberline {1.7}Testes, Automação, Segurança e Integração Contínua (30h)}{10}{section.1.7}%
-\contentsline {subsection}{\numberline {1.7.1}A Pirâmide de Testes no Android}{10}{subsection.1.7.1}%
-\contentsline {subsection}{\numberline {1.7.2}Pipeline CI/CD Automatizado com GitHub Actions}{10}{subsection.1.7.2}%
-\contentsline {chapter}{\numberline {2}Módulo 2 – Trilha de IA aplicada à Otimização de Sistemas Android (75 Horas)}{11}{chapter.2}%
-\contentsline {section}{\numberline {2.1}AOSP – Observabilidade e Desempenho (25h)}{11}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}A Arquitetura em Camadas do AOSP}{11}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}O Mecanismo de Comunicação Inter-Processos: Binder IPC}{12}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Observabilidade em Nanossegundos com Perfetto Trace}{12}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Aprendizado de Máquina e Aprendizado Profundo (30h)}{13}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Detecção de Anomalias com Autoencoders Neurais}{13}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}IA On-device e Otimização de Modelos (20h)}{14}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Teoria Matemática da Quantização Afim (FP32 $\to $ INT8)}{14}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Revisão da Literatura e Estado da Arte: IA e Observabilidade em SO}{14}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Arquitetura de Engenharia do Projeto Final: Seldon Anomaly Watcher}{15}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Especificação Técnica dos Módulos da Solução}{16}{subsection.2.5.1}%
-\contentsline {chapter}{\numberline {3}Módulo 3 – Trilha de Segurança de Dispositivos Móveis e Automação (75 Horas)}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introdução à Cibersegurança, Modelagem de Ameaças e Vulnerabilidades (35h)}{17}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Metodologia de Modelagem de Ameaças: STRIDE}{17}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Superfícies de Ataque Críticas no Android}{17}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}AOSP – Arquitetura de Segurança Android (20h)}{18}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}A Sandbox Baseada em UID Unix}{18}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Security-Enhanced Linux (SELinux): Mandatory Access Control}{18}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Android Keystore \& Hardware StrongBox}{19}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Automação de Testes e Validações de Segurança (20h)}{19}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Integração DevSecOps Contínua}{19}{subsection.3.3.1}%
-\contentsline {section}{\numberline {3.4}Revisão da Literatura e Estado da Arte em Cibersegurança Móvel}{20}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Arquitetura de Engenharia do Projeto Final: Seldon SecGuard DevSecOps}{20}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Especificação Técnica dos Módulos do Sistema}{20}{subsection.3.5.1}%
-\contentsline {chapter}{\numberline {4}Módulo 4 – Trilha de Eficiência Energética e Algoritmos de Otimização (75 Horas)}{22}{chapter.4}%
-\contentsline {section}{\numberline {4.1}AOSP – Gestão Energética da Plataforma (25h)}{22}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}O Subsistema PowerManagerService e os WakeLocks}{22}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}A Máquina de Estados do Doze Mode}{23}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Medição e Profiling Energético (25h)}{23}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Fundamentos Físicos da Potência e Energia}{23}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Instrumentação Física em Bancada com o Monsoon Power Monitor}{24}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Modelagem e Algoritmos de Otimização (25h)}{24}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Teoria da Otimização Multiobjetivo e Fronteira de Pareto}{24}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}O Algoritmo Genético NSGA-II}{24}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Revisão da Literatura e Estado da Arte em Eficiência Energética Móvel}{25}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Arquitetura de Engenharia do Projeto Final: Seldon EcoOptimizer}{26}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Especificação Técnica dos Módulos do Sistema}{26}{subsection.4.5.1}%
-\contentsline {chapter}{\numberline {5}Ambiente de Engenharia AOSP Android 15 e Política de Documentação}{28}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Fundamentação da Árvore AOSP Android 15}{28}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}A Interface de IPC: AIDL NDK e Estabilidade VINTF}{29}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}O Daemon Nativo de Sistema (\texttt {seldond})}{29}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Confinamento de Segurança: Políticas SELinux}{30}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Política de Engenharia: Documentação Obrigatória por Feature}{30}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Roteiro de Compilação e Emulação AOSP}{31}{section.5.5}%
-\contentsline {chapter}{\numberline {6}Avaliação Quantitativa \& Benchmark Empírico com a Literatura}{32}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Metodologia Experimental e Ambiente de Testes}{32}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Módulo 2: Benchmark de IA e Quantização INT8}{32}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Módulo 3: Benchmark de Segurança e Proteção IPC}{33}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Módulo 4: Benchmark de Eficiência Energética e NSGA-II}{33}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Validação Experimental em Smartphone Real: Samsung Galaxy S23 Ultra}{33}{section.6.5}%
+\contentsline {chapter}{\numberline {1}Módulo 1 – Núcleo Comum de Formação (210 Horas)}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Dados, Experimentação e Metodologia Científica (30h)}{4}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Formulação de Problemas Tecnológicos e Hipóteses}{4}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Desenho Experimental e Variáveis de Controle}{5}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Análise Estatística Inferencial: Teste $t$ de Student e ANOVA}{5}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Engenharia de Software, Requisitos e Gestão do Desenvolvimento (24h)}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Engenharia de Requisitos Funcionais e Não Funcionais}{6}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Matriz de Rastreabilidade de Requisitos (RTM)}{6}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Metodologia de Projetos, Ética e Habilidades Profissionais (30h)}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Aprendizagem Baseada em Projetos (PBL) na Residência}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Governança de Dados e Conformidade com a LGPD}{7}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Arquitetura de Software (18h)}{7}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Clean Architecture no Ecossistema Android}{8}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Implementação Prática: UseCase Puro com Kotlin}{8}{subsection.1.4.2}%
+\contentsline {section}{\numberline {1.5}Inteligência Artificial: Fundamentos, Frameworks e Aplicações (36h)}{9}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}O Pipeline Clássico de Aprendizado Supervisionado}{9}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Matriz de Confusão e Métricas de Validação Rigorosas}{9}{subsection.1.5.2}%
+\contentsline {section}{\numberline {1.6}Programação Java/Kotlin e Desenvolvimento de Aplicações Android (42h)}{9}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Os Quatro Componentes Canônicos do AOSP}{9}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Interface Reativa com Jetpack Compose e StateFlow}{10}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}Testes, Automação, Segurança e Integração Contínua (30h)}{11}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}A Pirâmide de Testes no Android}{11}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Pipeline CI/CD Automatizado com GitHub Actions}{11}{subsection.1.7.2}%
+\contentsline {chapter}{\numberline {2}Módulo 2 – Trilha de IA aplicada à Otimização de Sistemas Android (75 Horas)}{12}{chapter.2}%
+\contentsline {section}{\numberline {2.1}AOSP – Observabilidade e Desempenho (25h)}{12}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}A Arquitetura em Camadas do AOSP}{12}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}O Mecanismo de Comunicação Inter-Processos: Binder IPC}{13}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Observabilidade em Nanossegundos com Perfetto Trace}{13}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Aprendizado de Máquina e Aprendizado Profundo (30h)}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Detecção de Anomalias com Autoencoders Neurais}{14}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}IA On-device e Otimização de Modelos (20h)}{15}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Teoria Matemática da Quantização Afim (FP32 $\to $ INT8)}{15}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Revisão da Literatura e Estado da Arte: IA e Observabilidade em SO}{15}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Arquitetura de Engenharia do Projeto Final: Seldon Anomaly Watcher}{16}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Especificação Técnica dos Módulos da Solução}{17}{subsection.2.5.1}%
+\contentsline {chapter}{\numberline {3}Módulo 3 – Trilha de Segurança de Dispositivos Móveis e Automação (75 Horas)}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introdução à Cibersegurança, Modelagem de Ameaças e Vulnerabilidades (35h)}{18}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Metodologia de Modelagem de Ameaças: STRIDE}{18}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Superfícies de Ataque Críticas no Android}{18}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}AOSP – Arquitetura de Segurança Android (20h)}{19}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}A Sandbox Baseada em UID Unix}{19}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Security-Enhanced Linux (SELinux): Mandatory Access Control}{19}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Android Keystore \& Hardware StrongBox}{20}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Automação de Testes e Validações de Segurança (20h)}{20}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Integração DevSecOps Contínua}{20}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Revisão da Literatura e Estado da Arte em Cibersegurança Móvel}{21}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Arquitetura de Engenharia do Projeto Final: Seldon SecGuard DevSecOps}{21}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Especificação Técnica dos Módulos do Sistema}{21}{subsection.3.5.1}%
+\contentsline {chapter}{\numberline {4}Módulo 4 – Trilha de Eficiência Energética e Algoritmos de Otimização (75 Horas)}{23}{chapter.4}%
+\contentsline {section}{\numberline {4.1}AOSP – Gestão Energética da Plataforma (25h)}{23}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}O Subsistema PowerManagerService e os WakeLocks}{23}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}A Máquina de Estados do Doze Mode}{24}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Medição e Profiling Energético (25h)}{24}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Fundamentos Físicos da Potência e Energia}{24}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Instrumentação Física em Bancada com o Monsoon Power Monitor}{25}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Modelagem e Algoritmos de Otimização (25h)}{25}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Teoria da Otimização Multiobjetivo e Fronteira de Pareto}{25}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}O Algoritmo Genético NSGA-II}{25}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Revisão da Literatura e Estado da Arte em Eficiência Energética Móvel}{26}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Arquitetura de Engenharia do Projeto Final: Seldon EcoOptimizer}{27}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Especificação Técnica dos Módulos do Sistema}{27}{subsection.4.5.1}%
+\contentsline {chapter}{\numberline {5}Ambiente de Engenharia AOSP Android 15 e Política de Documentação}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Fundamentação da Árvore AOSP Android 15}{29}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}A Interface de IPC: AIDL NDK e Estabilidade VINTF}{30}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}O Daemon Nativo de Sistema (\texttt {seldond})}{30}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Confinamento de Segurança: Políticas SELinux}{31}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Política de Engenharia: Documentação Obrigatória por Feature}{31}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Roteiro de Compilação e Emulação AOSP}{32}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Avaliação Quantitativa \& Benchmark Empírico com a Literatura}{33}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Metodologia Experimental e Ambiente de Testes}{33}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Módulo 2: Benchmark de IA e Quantização INT8}{33}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Módulo 3: Benchmark de Segurança e Proteção IPC}{34}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Módulo 4: Benchmark de Eficiência Energética e NSGA-II}{34}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Validação Experimental em Smartphone Real: Samsung Galaxy S23 Ultra}{34}{section.6.5}%
+\contentsline {chapter}{\numberline {7}Fronteiras Tecnológicas, Ecossistema Open Source \& Análise de Mercado}{36}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Levantamento de Novas Tecnologias \& Repositórios no GitHub}{36}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Apache NimBLE e Netsim (nimble\_bridge)}{36}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Transição para Rust no Código Nativo do AOSP}{36}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}ExecuTorch (Meta) e LiteRT (Google)}{37}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Dimensionamento Comercial do Mercado Global (TAM, SAM e SOM)}{37}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Público-Alvo, Clientes e Proposta de Valor Comercial}{37}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Oportunidades Estratégicas no Brasil: A Lei de Informática}{38}{section.7.4}%
