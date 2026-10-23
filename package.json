@@ -13,7 +13,8 @@
     "aosp:deploy": "./scripts/deploy_to_emulator.sh",
     "docs:verify": "./scripts/verify_feature_docs.sh",
     "hooks:install": "./scripts/install_hooks.sh",
-    "test:projects": "./scripts/run_all_project_tests.sh"
+    "test:projects": "./scripts/run_all_project_tests.sh",
+    "benchmark:literature": "python3 scripts/benchmark_against_literature.py"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

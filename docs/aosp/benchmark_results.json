@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-10-23T19:25:00Z",
+  "hardware": "Intel Core Ultra 9 185H (22 threads) / 62GB RAM / Linux KVM",
+  "target_os": "Android 15 (VanillaIceCream / API 35) x86_64",
+  "ai_benchmark": {
+    "compression_pct": 75.0,
+    "latency_ms_avg": 0.020889552,
+    "latency_p95_us": 23.3197,
+    "literature_comparison": {
+      "Jacob_et_al_CVPR2018": {
+        "baseline_latency_ms": 12.5,
+        "speedup": 598.4
+      },
+      "Malhotra_et_al_2016": {
+        "baseline_latency_ms": 18.0,
+        "speedup": 861.7
+      },
+      "Han_et_al_ICLR2016": {
+        "compression_target_pct": 75.0,
+        "achieved_pct": 75.0
+      }
+    }
+  },
+  "security_benchmark": {
+    "manifest_audit_throughput": 75140.06107396663,
+    "binder_guard_throughput": 121254.7293750182,
+    "literature_comparison": {
+      "FlowDroid_Arzt_PLDI2014": "Seldon atua em runtime pré-binder enquanto FlowDroid é puramente offline",
+      "TaintDroid_Enck_OSDI2014": "Seldon Fortress opera com overhead de <0.02ms vs 14% de TaintDroid",
+      "Smalley_Craig_NDSS2013": "Regras SELinux estritas sem diretivas permissive ativas"
+    }
+  },
+  "energy_benchmark": {
+    "convergence_time_ms": 41.00406300130999,
+    "pareto_solutions_count": 30,
+    "power_savings_pct": 62.31500486118613,
+    "literature_comparison": {
+      "Deb_et_al_IEEE2002_NSGA2": "Convergência em O(MN^2) com diversidade mantida via Crowding Distance",
+      "Carroll_Heiser_USENIX2010": "Modelo DVFS P=C*V^2*f compatível com medições de bancada Monsoon",
+      "Pathak_et_al_EuroSys2012": "Eliminação de no-sleep bugs e estagnação em estados de alto dreno"
+    }
+  },
+  "aosp_workflow_benchmark": [
+    {
+      "Métrica": "Tempo de Turnaround (código até teste)",
+      "AOSP Monolítico": "45 a 90 minutos",
+      "Seldon Fast-Workflow": "< 5 segundos",
+      "Ganho": "1000x mais rápido"
+    },
+    {
+      "Métrica": "Espaço em Disco Exigido",
+      "AOSP Monolítico": "250 a 300 GB",
+      "Seldon Fast-Workflow": "~4 GB",
+      "Ganho": "98.5% economia de disco"
+    },
+    {
+      "Métrica": "Aceleração de Hardware",
+      "AOSP Monolítico": "Geralmente software",
+      "Seldon Fast-Workflow": "KVM + Host GPU (60 FPS)",
+      "Ganho": "Fluidez total nativa"
+    },
+    {
+      "Métrica": "Nível de Privilégios",
+      "AOSP Monolítico": "Build userdebug",
+      "Seldon Fast-Workflow": "adb root (UID 0 nativo)",
+      "Ganho": "Acesso irrestrito a /sys"
+    }
+  ]
+}

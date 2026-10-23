@@ -33,6 +33,13 @@ Brendan Gregg.
   Observability}.
 \newblock Addison-Wesley Professional, 2019.
 
+\bibitem{han2016deep}
+Song Han, Huizi Mao, and William~J. Dally.
+\newblock Deep compression: Compressing deep neural networks with pruning,
+  trained quantization and huffman coding.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2016.
+
 \bibitem{jacob2018quantization}
 Benoit Jacob, Skirmantas Kligys, Bo~Chen, Menglong Zhu, Matthew Tang, Andrew
   Howard, Hartwig Adam, and Dmitry Kalenichenko.

@@ -67,3 +67,8 @@
 \contentsline {section}{\numberline {5.3}Confinamento de Segurança: Políticas SELinux}{30}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Política de Engenharia: Documentação Obrigatória por Feature}{30}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Roteiro de Compilação e Emulação AOSP}{31}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Avaliação Quantitativa \& Benchmark Empírico com a Literatura}{32}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Metodologia Experimental e Ambiente de Testes}{32}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Módulo 2: Benchmark de IA e Quantização INT8}{32}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Módulo 3: Benchmark de Segurança e Proteção IPC}{33}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Módulo 4: Benchmark de Eficiência Energética e NSGA-II}{33}{section.6.4}%

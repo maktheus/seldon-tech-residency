@@ -33,6 +33,7 @@ import { DisciplineModal } from './components/ui/DisciplineModal';
 import { QuizModal } from './components/ui/QuizModal';
 import { ProjectArchitectures } from './components/modules/ProjectArchitectures';
 import { AospEmulatorConsole } from './components/interactive/AospEmulatorConsole';
+import { LiteratureBenchmarkDashboard } from './components/interactive/LiteratureBenchmarkDashboard';
 
 export const App: React.FC = () => {
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -349,6 +350,9 @@ export const App: React.FC = () => {
 
         {/* REVISÃO DA LITERATURA E ARQUITETURAS DE SOLUÇÃO DOS 3 PROJETOS FINAIS */}
         <ProjectArchitectures />
+
+        {/* BENCHMARK EMPÍRICO RIGOROSO COM A LITERATURA CIENTÍFICA */}
+        <LiteratureBenchmarkDashboard />
       </main>
 
       {/* Footer */}
