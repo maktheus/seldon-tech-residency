@@ -1,0 +1,175 @@
+\documentclass[11pt,a4paper,oneside]{report}
+
+% --- Pacotes de Linguagem e Tipografia ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+
+% --- Geometria da Página ---
+\usepackage[top=2.5cm, bottom=2.5cm, left=3.0cm, right=2.5cm]{geometry}
+
+% --- Pacotes Matemáticos ---
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+
+% --- Elementos Gráficos e Cores ---
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+
+% --- Definição de Cores Modernas ---
+\definecolor{seldonCyan}{HTML}{0891B2}
+\definecolor{seldonViolet}{HTML}{7C3AED}
+\definecolor{seldonGreen}{HTML}{059669}
+\definecolor{seldonAmber}{HTML}{D97706}
+\definecolor{seldonDark}{HTML}{0F172A}
+\definecolor{codeBg}{HTML}{F8FAFC}
+\definecolor{codeFrame}{HTML}{E2E8F0}
+\definecolor{boxBg}{HTML}{F0FDF4}
+
+% --- Listagens de Código (listings) ---
+\usepackage{listings}
+\lstset{
+    backgroundcolor=\color{codeBg},
+    basicstyle=\ttfamily\footnotesize\color{seldonDark},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{gray}\itshape,
+    keywordstyle=\color{seldonViolet}\bfseries,
+    stringstyle=\color{seldonGreen},
+    numberstyle=\tiny\color{gray},
+    numbers=left,
+    numbersep=8pt,
+    frame=single,
+    rulecolor=\color{codeFrame},
+    tabsize=2,
+    showstringspaces=false,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ã}{{\~a}}1 {õ}{{\~o}}1 {Ã}{{\~A}}1 {Õ}{{\~O}}1
+             {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {à}{{\`a}}1 {À}{{\`A}}1
+}
+
+% --- Caixas de Destaque Pedagógico (tcolorbox) ---
+\usepackage[most]{tcolorbox}
+\newtcolorbox{pedagogico}[2][]{
+    enhanced,
+    colback=seldonCyan!5!white,
+    colframe=seldonCyan,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    title=#2,
+    arc=4mm,
+    boxrule=1pt,
+    drop shadow=black!10!white,
+    #1
+}
+
+\newtcolorbox{casopratico}[2][]{
+    enhanced,
+    colback=seldonGreen!5!white,
+    colframe=seldonGreen,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    title=#2,
+    arc=4mm,
+    boxrule=1pt,
+    drop shadow=black!10!white,
+    #1
+}
+
+\newtcolorbox{atencao}[1][]{
+    enhanced,
+    colback=seldonAmber!8!white,
+    colframe=seldonAmber,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    title={Atenção \& Boas Práticas de Engenharia},
+    arc=3mm,
+    boxrule=1pt,
+    #1
+}
+
+% --- Cabeçalhos e Rodapés ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{25pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}\textsl{\leftmark}}
+\fancyhead[R]{\small\color{seldonCyan}\textbf{Residência Tecnológica Seldon}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Formatação de Títulos ---
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{seldonDark}}
+  {\filleft\Huge\color{seldonCyan}\chaptertitlename\ \thechapter}{10pt}
+  {\titlerule[1.5pt]\vspace{1.5ex}\filright}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{seldonCyan}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{seldonViolet}}
+  {\thesubsection}{1em}{}
+
+% --- Tabelas e Links ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[colorlinks=true, linkcolor=seldonCyan, citecolor=seldonViolet, urlcolor=seldonGreen]{hyperref}
+
+% --- Informações do Documento ---
+\title{
+    \textbf{\Huge Residência Tecnológica Seldon}\\[0.5cm]
+    \Large\textbf{Manual Técnico Pedagógico Completo}\\
+    \large\textit{Android Open Source Project (AOSP), Inteligência Artificial On-Device, Cibersegurança Móvel e Otimização Energética Multiobjetivo}
+}
+\author{\textbf{Programa de Residência Tecnológica Seldon}}
+\date{Outubro de 2026 • 435 Horas de Formação}
+
+\begin{document}
+
+% --- Capa e Folha de Rosto ---
+\begin{titlepage}
+    \centering
+    \vspace*{1.5cm}
+    {\Huge\textbf{\color{seldonDark}RESIDÊNCIA TECNOLÓGICA SELDON}\par}
+    \vspace{0.8cm}
+    {\Large\color{seldonCyan}\textbf{Manual Técnico-Científico \& Pedagógico}\par}
+    \vspace{0.3cm}
+    {\large Formação Avançada em Android AOSP, Inteligência Artificial, Cibersegurança Móvel e Otimização Energética\par}
+    
+    \vspace{2cm}
+    \begin{tcolorbox}[colback=seldonDark, colframe=seldonCyan, arc=4mm, width=0.9\textwidth]
+        \centering\color{white}
+        \textbf{\large Estrutura Curricular Integral (435 Horas)}\\[0.3cm]
+        \begin{tabular}{ll}
+            \textbf{Módulo 1:} Núcleo Comum de Formação & 210h (7 Disciplinas)\\
+            \textbf{Módulo 2:} Trilha de Inteligência Artificial & 75h (3 Disciplinas)\\
+            \textbf{Módulo 3:} Trilha de Segurança de Dispositivos Móveis & 75h (3 Disciplinas)\\
+            \textbf{Módulo 4:} Trilha de Eficiência Energética & 75h (3 Disciplinas)\\
+        \end{tabular}
+    \end{tcolorbox}
+
+    \vfill
+    {\large\textbf{Documento de Referência Curricular e Técnica}\par}
+    {\small Baseado no Programa de Pós-Graduação e Formação Tecnológica Seldon\par}
+    \vspace{1cm}
+    {\large Outubro de 2026\par}
+\end{titlepage}
+
+% --- Sumário ---
+\tableofcontents
+\newpage
+
+% --- Inclusão dos Capítulos ---
+\include{capitulo1_nucleo_comum}
+\include{capitulo2_ia_otimizacao}
+\include{capitulo3_seguranca}
+\include{capitulo4_eficiencia_energetica}
+
+\end{document}

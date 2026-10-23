@@ -1,0 +1,128 @@
+\chapter{Módulo 2 – Trilha de IA aplicada à Otimização de Sistemas Android (75 Horas)}
+\label{chap:modulo2}
+
+A \textbf{Trilha de Inteligência Artificial aplicada à Otimização de Sistemas Android} constitui a primeira especialização avançada do programa Seldon. Nela, o foco desloca-se da aplicação para o interior do sistema operacional, explorando a fundo o \textbf{Android Open Source Project (AOSP)}. Os residentes aprendem a extrair telemetria em nanossegundos do kernel Linux e do runtime ART, modelar padrões complexos de uso com redes neurais profundas e converter esses modelos em artefatos quantizados ultracompactos capazes de rodar em tempo real na NPU do dispositivo móvel com baixíssimo impacto energético.
+
+---
+
+\section{AOSP – Observabilidade e Desempenho (25h)}
+
+\begin{pedagogico}{Objetivo Pedagógico da Disciplina}
+Compreender a arquitetura interna do Android em profundidade, dominar o mecanismo de comunicação interprocessos (Binder IPC), analisar o ciclo de vida da memória física via Low Memory Killer (LMK) e diagnosticar gargalos de desempenho e quedas de quadros com a ferramenta de rastreamento Perfetto.
+\end{pedagogico}
+
+\subsection{A Arquitetura em Camadas do AOSP}
+O Android não é uma distribuição Linux convencional; ele implementa uma pilha de abstrações concebida para segurança, desacoplamento de hardware e isolamento de processos:
+\begin{enumerate}
+    \item \textbf{Kernel Linux:} Gerencia agendamento de processos (CFS), drivers de silício, gerenciamento de energia e contém o driver `/dev/binder`;
+    \item \textbf{Hardware Abstraction Layer (HAL):} Módulos C/C++ que expõem APIs genéricas para a plataforma (câmera, áudio, sensores) ocultando especificidades proprietárias dos semicondutores;
+    \item \textbf{Android Runtime (ART) \& Bionic Libc:} Motor de execução que compila bytecode DEX para código nativo (AOT/JIT) e provê Garbage Collection concorrente sem pausas longas;
+    \item \textbf{Application Framework:} Serviços de sistema nativos executados pelo processo central \texttt{system\_server} (ActivityManagerService, WindowManagerService, PowerManagerService);
+    \item \textbf{Aplicações:} Processos em espaço de usuário, cada qual encapsulado em sua própria jaula de permissões (UID Unix único).
+\end{enumerate}
+
+\subsection{O Mecanismo de Comunicação Inter-Processos: Binder IPC}
+Como cada aplicativo e serviço de sistema roda em seu próprio processo isolado, qualquer interação entre eles exige IPC (\textit{Inter-Process Communication}). O mecanismo padrão do Unix (sockets, pipes) impõe duas cópias de memória no kernel (espaço de usuário A $\to$ kernel $\to$ espaço de usuário B), gerando degradação inaceitável.
+
+O AOSP resolve este problema através do **Binder IPC**, que utiliza **compartilhamento de memória com cópia única (\textit{single-copy}) ou Zero-Copy**:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_binder_ipc.png}
+\caption{Fluxo Detalhado de Transação IPC no AOSP via driver \texttt{/dev/binder}: empacotamento em Parcel, syscall \texttt{ioctl}, resolução no ServiceManager e entrega Zero-Copy via \texttt{mmap} compartilhado.}
+\label{fig:binder_flow_img}
+\end{figure}
+
+O cliente prepara uma estrutura de dados serializada chamada \texttt{Parcel}. Através da interface AIDL (\textit{Android Interface Definition Language}), o código Kotlin invoca um método local no \textit{Proxy}, que empacota os argumentos e realiza a chamada de sistema \texttt{ioctl(fd, BINDER\_WRITE\_READ, \&bwr)}. O kernel localiza a página de memória do processo destino pré-alocada via \texttt{mmap()} e grava os dados diretamente nela, acordando uma thread da threadpool do servidor para executar o \textit{Stub}.
+
+\subsection{Observabilidade em Nanossegundos com Perfetto Trace}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_perfetto_timeline.png}
+\caption{Rastreamento de Execução no Perfetto: identificação visual de contenção de lock no barramento Binder e diagnóstico de queda de quadros (\textit{jank frame}) violando o deadline de 16.6ms.}
+\label{fig:perfetto_trace_img}
+\end{figure}
+Para diagnosticar gargalos que degradam a taxa de 60 ou 120 quadros por segundo (onde cada quadro dispõe de apenas $16{,}6\text{ ms}$ ou $8{,}3\text{ ms}$), utiliza-se o **Perfetto**:
+\begin{itemize}
+    \item Gravação de rastros baseada no subsistema \texttt{ftrace} do kernel;
+    \item Eventos de agendamento de CPU: \texttt{sched\_switch} e \texttt{sched\_wakeup};
+    \item Transações de Binder: visualização do tempo de espera e fila de atendimento;
+    \item \textit{Choreographer} e \textit{RenderThread}: rastreamento de \texttt{doFrame}, inflamento de views e chamadas de desenho OpenGL/Vulkan.
+\end{itemize}
+
+---
+
+\section{Aprendizado de Máquina e Aprendizado Profundo (30h)}
+
+\begin{pedagogico}{Objetivo Pedagógico da Disciplina}
+Capacitar os residentes a projetar, treinar e validar redes neurais profundas aplicadas à detecção de anomalias operacionais e predição de comportamento em sistemas Android, tratando dados ruidosos de telemetria.
+\end{pedagogico}
+
+\subsection{Detecção de Anomalias com Autoencoders Neurais}
+Uma das aplicações mais nobres de IA no AOSP é detectar quando um aplicativo entra em um estado anômalo de dreno silencioso de bateria ou vazamento de recursos. Para tal, treina-se um **Autoencoder** exclusivamente com dados de operação nominal:
+
+\begin{equation}
+    \mathbf{z} = \sigma(\mathbf{W}_e \mathbf{x} + \mathbf{b}_e) \quad \text{(Codificador)}
+\end{equation}
+\begin{equation}
+    \hat{\mathbf{x}} = \sigma(\mathbf{W}_d \mathbf{z} + \mathbf{b}_d) \quad \text{(Decodificador)}
+\end{equation}
+onde $\mathbf{x} \in \mathbb{R}^d$ é o vetor de métricas instantâneas (uso de CPU por core, taxa de interrupts, frequência de chamadas IPC Binder). O modelo é treinado para minimizar o Erro Quadrático Médio de reconstrução (\textit{Reconstruction Error}):
+\begin{equation}
+    \text{MSE}(\mathbf{x}, \hat{\mathbf{x}}) = \frac{1}{d} \sum_{j=1}^{d} (x_j - \hat{x}_j)^2
+\end{equation}
+
+Quando o dispositivo opera em regime normal, o erro de reconstrução permanece abaixo de um limiar $\tau$. Se um aplicativo defeituoso iniciar um loop infinito ou adquirir um \textit{WakeLock} fantasma, o vetor de entrada $\mathbf{x}_{\text{anomalo}}$ diverte da distribuição aprendida, fazendo $\text{MSE} \gg \tau$ e disparando o alerta preventivo antes do esgotamento da bateria.
+
+---
+
+\section{IA On-device e Otimização de Modelos (20h)}
+
+\begin{pedagogico}{Objetivo Pedagógico da Disciplina}
+Dominar as técnicas de engenharia para adaptação de modelos neurais em dispositivos móveis, aplicando quantização afim de inteiros (INT8), poda esparsa de conexões sinápticas e delegação de tensores para a NPU via Android NNAPI e LiteRT.
+\end{pedagogico}
+
+\subsection{Teoria Matemática da Quantização Afim \texorpdfstring{(FP32 $\to$ INT8)}{(FP32 para INT8)}}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_quantizacao_neural.png}
+\caption{Mapeamento Afim de Quantização On-Device: conversão de tensores contínuos em Float32 para inteiros uniformes em INT8, exibindo redução de 75\% no tamanho e aceleração via NNAPI.}
+\label{fig:quantizacao_img}
+\end{figure}
+
+Modelos neurais convencionais operam com tensores em ponto flutuante de precisão simples (\texttt{Float32}, ocupando 4 bytes por parâmetro). Em smartphones, essa representação é onerosa: consome banda excessiva de memória RAM e dissipa calor desnecessário.
+
+A **Quantização Afim de Inteiros (Uniform Affine Quantization)** mapeia um valor real contínuo $r \in [\alpha, \beta]$ em um inteiro de 8 bits $q \in [-128, 127]$ através da relação linear:
+\begin{equation}
+    r \approx S \cdot (q - Z)
+\end{equation}
+onde:
+\begin{itemize}
+    \item $S \in \mathbb{R}^+$ é o fator de escala (\textit{Scale Factor}), dado por:
+    \begin{equation}
+        S = \frac{\beta - \alpha}{q_{\text{max}} - q_{\text{min}}} = \frac{\beta - \alpha}{255}
+    \end{equation}
+    \item $Z \in \mathbb{Z}$ é o ponto zero (\textit{Zero-Point}), garantindo que o valor real $0{,}0$ seja representado exatamente por um número inteiro sem viés numérico:
+    \begin{equation}
+        Z = \text{round}\left( -\frac{\alpha}{S} \right) + q_{\text{min}}
+    \end{equation}
+\end{itemize}
+
+O mapeamento de quantização direto é formalizado por:
+\begin{equation}
+    q = \text{clip}\left( \text{round}\left( \frac{r}{S} \right) + Z, \ q_{\text{min}}, \ q_{\text{max}} \right)
+\end{equation}
+
+\begin{casopratico}{Caso Prático: Quantização de Modelo de Visão MobileNet}
+\textbf{Estado Inicial (FP32):} Tamanho do arquivo: $16{,}4\text{ MB}$. Latência de inferência em CPU: $82\text{ ms}$. Consumo energético por frame: $1{,}82\text{ mWh}$.\\
+\textbf{Após Post-Training Full Integer Quantization (INT8):}
+\begin{itemize}
+    \item Tamanho reduzido para $4{,}1\text{ MB}$ (redução exata de $75\%$ na ocupação de memória Flash e RAM);
+    \item Latência reduzida para $18\text{ ms}$ quando delegado para a NPU via driver Android NNAPI;
+    \item Consumo energético caiu para $0{,}41\text{ mWh}$ por inferência;
+    \item Perda de acurácia Top-1 insignificante: apenas $0{,}3\%$ de degradação em relação ao baseline FP32.
+\end{itemize}
+\end{casopratico}
+
+\subsection{Aceleração em Hardware: Android NNAPI e LiteRT}
+O runtime LiteRT (TensorFlow Lite) compila o grafo quantizado em formato FlatBuffers (\texttt{.tflite}). Durante a execução, ele consulta a HAL da \textbf{NNAPI (Neural Networks API)}, que roteia a multiplicação de matrizes inteiras diretamente para as unidades vetoriais dedicadas do silício (NPU Snapdragon, Hexagon DSP ou MediaTek APU), contornando as CPUs convencionais e poupando preciosos ciclos de clock.

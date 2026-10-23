@@ -1,0 +1,56 @@
+\babel@toc {brazilian}{}\relax 
+\contentsline {chapter}{\numberline {1}Módulo 1 – Núcleo Comum de Formação (210 Horas)}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Dados, Experimentação e Metodologia Científica (30h)}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Formulação de Problemas Tecnológicos e Hipóteses}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Desenho Experimental e Variáveis de Controle}{4}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Análise Estatística Inferencial: Teste $t$ de Student e ANOVA}{4}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Engenharia de Software, Requisitos e Gestão do Desenvolvimento (24h)}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Engenharia de Requisitos Funcionais e Não Funcionais}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Matriz de Rastreabilidade de Requisitos (RTM)}{5}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Metodologia de Projetos, Ética e Habilidades Profissionais (30h)}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Aprendizagem Baseada em Projetos (PBL) na Residência}{6}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Governança de Dados e Conformidade com a LGPD}{6}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Arquitetura de Software (18h)}{6}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Clean Architecture no Ecossistema Android}{7}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Implementação Prática: UseCase Puro com Kotlin}{7}{subsection.1.4.2}%
+\contentsline {section}{\numberline {1.5}Inteligência Artificial: Fundamentos, Frameworks e Aplicações (36h)}{8}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}O Pipeline Clássico de Aprendizado Supervisionado}{8}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Matriz de Confusão e Métricas de Validação Rigorosas}{8}{subsection.1.5.2}%
+\contentsline {section}{\numberline {1.6}Programação Java/Kotlin e Desenvolvimento de Aplicações Android (42h)}{8}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Os Quatro Componentes Canônicos do AOSP}{8}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Interface Reativa com Jetpack Compose e StateFlow}{9}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}Testes, Automação, Segurança e Integração Contínua (30h)}{10}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}A Pirâmide de Testes no Android}{10}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Pipeline CI/CD Automatizado com GitHub Actions}{10}{subsection.1.7.2}%
+\contentsline {chapter}{\numberline {2}Módulo 2 – Trilha de IA aplicada à Otimização de Sistemas Android (75 Horas)}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}AOSP – Observabilidade e Desempenho (25h)}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}A Arquitetura em Camadas do AOSP}{11}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}O Mecanismo de Comunicação Inter-Processos: Binder IPC}{12}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Observabilidade em Nanossegundos com Perfetto Trace}{12}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Aprendizado de Máquina e Aprendizado Profundo (30h)}{13}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Detecção de Anomalias com Autoencoders Neurais}{13}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}IA On-device e Otimização de Modelos (20h)}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Teoria Matemática da Quantização Afim (FP32 $\to $ INT8)}{14}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Aceleração em Hardware: Android NNAPI e LiteRT}{15}{subsection.2.3.2}%
+\contentsline {chapter}{\numberline {3}Módulo 3 – Trilha de Segurança de Dispositivos Móveis e Automação (75 Horas)}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introdução à Cibersegurança, Modelagem de Ameaças e Vulnerabilidades (35h)}{16}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Metodologia de Modelagem de Ameaças: STRIDE}{16}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Superfícies de Ataque Críticas no Android}{16}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}AOSP – Arquitetura de Segurança Android (20h)}{17}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}A Sandbox Baseada em UID Unix}{17}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Security-Enhanced Linux (SELinux): Mandatory Access Control}{17}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Android Verified Boot (AVB 2.0) e Cadeia de Confiança}{18}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Android Keystore \& Hardware StrongBox}{18}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Automação de Testes e Validações de Segurança (20h)}{19}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Integração DevSecOps Contínua}{19}{subsection.3.3.1}%
+\contentsline {chapter}{\numberline {4}Módulo 4 – Trilha de Eficiência Energética e Algoritmos de Otimização (75 Horas)}{20}{chapter.4}%
+\contentsline {section}{\numberline {4.1}AOSP – Gestão Energética da Plataforma (25h)}{20}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}O Subsistema PowerManagerService e os WakeLocks}{20}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}A Máquina de Estados do Doze Mode}{21}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Medição e Profiling Energético (25h)}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Fundamentos Físicos da Potência e Energia}{22}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Instrumentação Física em Bancada com o Monsoon Power Monitor}{22}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Profiling por Software com Google Battery Historian}{22}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Modelagem e Algoritmos de Otimização (25h)}{23}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Teoria da Otimização Multiobjetivo e Fronteira de Pareto}{23}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}O Algoritmo Genético NSGA-II}{24}{subsection.4.3.2}%

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, HelpCircle, Search, Cpu, GitBranch } from 'lucide-react';
+import { Sparkles, HelpCircle, Search, Cpu, GitBranch, FileText } from 'lucide-react';
 
 interface NavbarProps {
   activeModuleId: number | null;
@@ -78,6 +78,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          <a
+            href="./manual_seldon_tecnico.pdf"
+            download="Manual_Seldon_Residencia_Tecnologica.pdf"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/40 text-violet-300 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer shadow-sm"
+            title="Baixar Manual Completo em PDF (LaTeX)"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Manual PDF (LaTeX)</span>
+          </a>
+
           <button
             onClick={onOpenQuiz}
             className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer shadow-sm"

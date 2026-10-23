@@ -1,0 +1,135 @@
+\chapter{Módulo 4 – Trilha de Eficiência Energética e Algoritmos de Otimização (75 Horas)}
+\label{chap:modulo4}
+
+A \textbf{Trilha de Eficiência Energética avaliada por Algoritmos de Otimização} integra a física dos semicondutores, a arquitetura do kernel Linux e a teoria matemática da otimização multiobjetivo. Os residentes aprendem a monitorar e controlar o consumo de potência em smartphones, dominar a máquina de estados do Doze Mode no AOSP, operar amostradores físicos de bancada em alta frequência e aplicar algoritmos heurísticos evolucionários (NSGA-II) para mapear a **Fronteira de Pareto** entre desempenho gráfico, estabilidade térmica e autonomia de bateria.
+
+---
+
+\section{AOSP – Gestão Energética da Plataforma (25h)}
+
+\begin{pedagogico}{Objetivo Pedagógico da Disciplina}
+Compreender os mecanismos internos do AOSP responsáveis pela conservação de energia: o serviço central PowerManagerService, o ciclo de vida e os perigos de vazamento de WakeLocks, a máquina de estados do Doze Mode, os App Standby Buckets e o escalonador ciente de energia (Energy-Aware Scheduler - EAS) em processadores heterogêneos big.LITTLE.
+\end{pedagogico}
+
+\subsection{O Subsistema PowerManagerService e os WakeLocks}
+No Android, o estado padrão do dispositivo ao apagar a tela é progredir gradualmente para o estado de suspensão profunda (\textit{Deep Sleep}), onde os núcleos de CPU são desligados em seus estados de energia mais baixos ($C\text{-states}$).
+
+Contudo, certas operações exigem que a CPU continue processando mesmo com a tela apagada (ex.: gravação de áudio ou navegação por GPS). Para isso, a API expõe os **WakeLocks**:
+\begin{lstlisting}[language=Java, caption={Uso Antigo e Perigoso de WakeLock}]
+// Pratica legada sujeita a dreno vampiro:
+val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+val wakeLock = powerManager.newWakeLock(
+    PowerManager.PARTIAL_WAKE_LOCK, "Seldon::GpsSensorLock"
+)
+wakeLock.acquire() // Se ocorrer uma excecao antes de release(), o device nunca dorme!
+\end{lstlisting}
+
+\begin{atencao}
+O vazamento de um \texttt{PARTIAL\_WAKE\_LOCK} impede o processador de entrar em repouso profundo, mantendo a corrente de repouso em $80\text{ a }150\text{ mA}$ em vez de $< 5\text{ mA}$. Em uma noite de 8 horas, isso consome até $35\%$ da carga total da bateria sem qualquer benefício para o usuário (fenômeno conhecido como \textbf{dreno vampiro}).
+\end{atencao}
+
+\subsection{A Máquina de Estados do Doze Mode}
+Introduzido a partir do Android 6.0 e aprimorado nas versões subsequentes, o **Doze Mode** é uma máquina de estados do sistema que atua quando o aparelho está desconectado da tomada e imóvel por determinado período:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_doze_mode_timeline.png}
+\caption{Consumo Energético no Tempo: comparação entre o comportamento nominal com Doze Mode (-2.1\% de bateria em 8h) versus dreno vampiro contínuo provocado por vazamento de \texttt{PARTIAL\_WAKE\_LOCK} (-35\% de bateria).}
+\label{fig:doze_timeline_img}
+\end{figure}
+
+No estado **Deep Doze**:
+\begin{itemize}
+    \item Todo o tráfego de rede de dados e Wi-Fi para aplicativos normais é suspenso;
+    \item O sistema ignora qualquer \texttt{PARTIAL\_WAKE\_LOCK} adquirido por apps convencionais;
+    \item Jobs agendados via \texttt{JobScheduler} e sincronizações são postergados até a próxima **Janela de Manutenção** (\textit{Maintenance Window});
+    \item As Janelas de Manutenção tornam-se progressivamente mais espaçadas no tempo (ex.: após 30 minutos, 1 hora, 2 horas, 4 horas), maximizando os períodos de sono ininterrupto da CPU.
+\end{itemize}
+
+---
+
+\section{Medição e Profiling Energético (25h)}
+
+\begin{pedagogico}{Objetivo Pedagógico da Disciplina}
+Capacitar os residentes na instrumentação física de bancada para medição de corrente e tensão em dispositivos móveis com amostradores de alta frequência (Monsoon Power Monitor), análise aprofundada de software com Google Battery Historian e condução de experimentos controlados de alta repetibilidade.
+\end{pedagogico}
+
+\subsection{Fundamentos Físicos da Potência e Energia}
+A potência elétrica instantânea $P(t)$ dissipada por um subsistema computacional alimentado por uma tensão de bateria $V(t)$ através da qual flui uma corrente $I(t)$ é definida por:
+\begin{equation}
+    P(t) = V(t) \cdot I(t) \quad [\text{Watts ou miliwatts, mW}]
+\end{equation}
+
+A energia total consumida $E$ ao longo de um ensaio de duração $T$ é a integral temporal da potência:
+\begin{equation}
+    E = \int_{0}^{T} P(t) \, dt = \int_{0}^{T} V(t) \cdot I(t) \, dt \quad [\text{Joules ou miliwatts-hora, mWh}]
+\end{equation}
+onde $1\text{ mWh} = 3{,}6\text{ Joules}$.
+
+\subsection{Instrumentação Física em Bancada com o Monsoon Power Monitor}
+Embora a API do Android informe níveis de bateria via \texttt{BatteryManager}, essa leitura baseia-se no algoritmo do chip indicador de combustível (\textit{Fuel Gauge}), que possui baixa frequência de amostragem (tipicamente $0{,}2\text{ a }1\text{ Hz}$) e alta incerteza estocástica.
+
+Para pesquisa tecnológica rigorosa, utiliza-se um analisador de potência em hardware dedicado (\textbf{Monsoon High Voltage Power Monitor}):
+\begin{itemize}
+    \item A bateria química interna do smartphone é desconectada fisicamente;
+    \item O dispositivo é alimentado diretamente pelos terminais de prova do medidor calibrado em $3{,}85\text{ V}$;
+    \item O equipamento amostra a corrente com frequência de até **$5{,}000\text{ amostras por segundo (5 kHz)}$**, capturando picos transitórios de corrente provocados por ativações do modem de rádio ou aceleração de GPU.
+\end{itemize}
+
+\subsection{Profiling por Software com Google Battery Historian}
+O AOSP registra continuamente eventos de energia no buffer circular do sistema. A coleta e decodificação estruturada desses dados é realizada através de:
+\begin{lstlisting}[language=bash, caption={Coleta de Bugreport para o Battery Historian}]
+# Limpa historico de estatisticas e zera linhas de base:
+adb shell dumpsys batterystats --reset
+
+# Conducao do ensaio experimental controlado...
+# Apos o teste, gera o relatorio completo:
+adb bugreport relatorio_ensaio.zip
+\end{lstlisting}
+O relatório gerado mapeia temporalmente: uso de tela, estados de WakeLocks, força de sinal de rede celular, estado térmico do SoC, frequência dos núcleos de CPU e aplicativos responsáveis por acidentais acorda-processos (\textit{wakeups}).
+
+---
+
+\section{Modelagem e Algoritmos de Otimização (25h)}
+
+\begin{pedagogico}{Objetivo Pedagógico da Disciplina}
+Formular problemas de otimização energética multiobjetivo no Android, dominar o conceito de Dominância de Pareto e implementar o algoritmo evolucionário NSGA-II para encontrar configurações operacionais que maximizem a fluidez gráfica minimizando o consumo e o aquecimento do dispositivo.
+\end{pedagogico}
+
+\subsection{Teoria da Otimização Multiobjetivo e Fronteira de Pareto}
+Em engenharia de sistemas móveis, raramente existe uma solução única ótima que satisfaça todos os critérios simultaneamente. Frequentemente, os objetivos entram em conflito intrínseco:
+\begin{equation}
+    \min_{\mathbf{x} \in \Omega} \ \mathbf{F}(\mathbf{x}) = \left( f_1(\mathbf{x}), \ f_2(\mathbf{x}), \ -f_3(\mathbf{x}) \right)^T
+\end{equation}
+onde $f_1(\mathbf{x})$ é a potência elétrica dissipada em mW, $f_2(\mathbf{x})$ é a temperatura máxima do silício em $^\circ\text{C}$ e $f_3(\mathbf{x})$ é a taxa de quadros por segundo (FPS).
+
+\textbf{Definição de Dominância de Pareto:} Uma solução vetorial $\mathbf{u}$ domina outra solução $\mathbf{v}$ (denotado por $\mathbf{u} \succ \mathbf{v}$) se, e somente se:
+\begin{equation}
+    \forall i \in \{1, \dots, m\}, \ f_i(\mathbf{u}) \le f_i(\mathbf{v}) \quad \text{e} \quad \exists j \in \{1, \dots, m\}, \ f_j(\mathbf{u}) < f_j(\mathbf{v})
+\end{equation}
+
+A **Fronteira de Pareto** (\textit{Pareto Optimal Front}) é o conjunto de todas as soluções não-dominadas no espaço de busca. Nenhuma configuração da Fronteira de Pareto pode ser aprimorada em um objetivo (ex.: obter mais FPS) sem obrigatoriamente degradar outro objetivo (ex.: gastar mais miliwatts de bateria).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{imagens/fig_pareto_multiobjetivo.png}
+\caption{Espaço de Soluções e Fronteira de Pareto: trade-off entre Taxa de Quadros (FPS) e Potência Dissipada (mW), destacando o Sweet Spot Seldon (60 FPS @ 920 mW) e configurações dominadas.}
+\label{fig:pareto_curve_img}
+\end{figure}
+
+\subsection{O Algoritmo Genético NSGA-II}
+Para explorar espaços combinatórios de alta dimensionalidade (frequências de clock de 8 núcleos, governadores de CPU, taxas de amostragem de sensores e níveis de brilho), o algoritmo **NSGA-II (Non-dominated Sorting Genetic Algorithm II)** opera através dos seguintes passos matemáticos:
+\begin{enumerate}
+    \item \textbf{Ordenação Não-Dominada Rápida:} Classifica a população de configurações em frentes de dominância sucessivas $\mathcal{F}_1, \mathcal{F}_2, \dots, \mathcal{F}_k$;
+    \item \textbf{Cálculo da Distância de Apinhamento (\textit{Crowding Distance}):} Mede a densidade de soluções vizinhas ao longo da fronteira para preservar a diversidade do conjunto ótimo:
+    \begin{equation}
+        d_i = \sum_{m=1}^{M} \frac{f_m(i+1) - f_m(i-1)}{f_m^{\text{max}} - f_m^{\text{min}}}
+    \end{equation}
+    \item \textbf{Operadores Genéticos e Seleção por Torneio:} Indivíduos em frentes de menor índice ou com maior distância de apinhamento são selecionados para cruzamento e mutação, convergindo em poucas gerações para a Fronteira de Pareto real do hardware.
+\end{enumerate}
+
+\begin{casopratico}{Caso Prático: Otimização de Firmware no AOSP}
+\textbf{Problema:} Encontrar a política de frequência dinâmica da CPU (\textit{schedutil}) que garanta $59{,}5\text{ FPS}$ estáveis em listas de alta densidade sem que a temperatura do silício ultrapasse $40^\circ\text{C}$.\\
+\textbf{Aplicação do NSGA-II:} População de 100 configurações de limiares de frequência ao longo de 50 gerações de ensaio automatizado.\\
+\textbf{Resultado Obtido:} A solução ótima de Pareto encontrada economizou **$18{,}4\%$ de potência elétrica** em relação à configuração original de fábrica, preservando $59{,}8\text{ FPS}$ contínuos e reduzindo a temperatura de pico em $4{,}2^\circ\text{C}$.
+\end{casopratico}
