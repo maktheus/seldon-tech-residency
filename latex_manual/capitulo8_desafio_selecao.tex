@@ -1,0 +1,90 @@
+\chapter{Processo Seletivo 2026 \& Desafio Técnico Prático: Mini-Seldon}
+\label{cap:desafio_selecao}
+
+\begin{pedagogico}{Objetivo e Visão Geral do Desafio de Admissão}
+O processo seletivo do Programa de Residência Tecnológica Seldon visa identificar candidatos com raciocínio lógico estruturado, domínio de boas práticas de engenharia de software e capacidade de transpor fundamentos conceituais para código executável. Este capítulo consolida o desenho curricular do \textbf{Mini-Seldon Telemetry \& Security Engine}, a delimitação precisa de escopo, as regras de avaliação e o roteiro das entrevistas técnicas.
+\end{pedagogico}
+
+\section{Contexto, Funil de Admissão e Cronograma Operacional}
+\label{sec:cronograma_selecao}
+
+O processo seletivo contou com 41 candidatos inscritos. Após análise curricular inicial, 30 candidatos foram convocados para a etapa prática. O cronograma foi rigorosamente dimensionado para acomodar o período de execução, a correção automatizada e a banca de entrevistas individuais antes do recesso de feriado:
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabularx}{\textwidth}{l p{3.2cm} X}
+\toprule
+\textbf{Data / Horário} & \textbf{Etapa} & \textbf{Atividades e Entregáveis} \\
+\midrule
+\textbf{Sexta-feira (Tarde)} & Disparo do Desafio & Envio do \texttt{starter\_kit\_seldon\_2026.zip} aos 30 candidatos. \\
+\textbf{Sábado a Terça-feira} & Execução Prática & Resolução das 3 tarefas em Python puro (esforço: 2 a 4 horas). \\
+\textbf{Terça-feira (23:59)} & \textbf{Prazo de Entrega} & Submissão do código (GitHub/Zip) e da Ficha Técnica de 1 página. \\
+\textbf{Quarta-feira (Manhã)} & Correção em Lote & Execução da suíte de 15 testes via \texttt{corrigir\_candidatos.py}. \\
+\textbf{Quarta e Quinta-feira} & Entrevistas Individuais & Bancas de 15 minutos com Matheus Uchoa e a Coordenação. \\
+\textbf{Quinta-feira (18:00)} & Deliberação Final & Divulgação dos 20 a 25 titulares aprovados antes do feriado. \\
+\bottomrule
+\end{tabularx}
+\caption{Cronograma oficial da etapa prática de seleção da Residência Seldon 2026.}
+\label{tab:cronograma_selecao}
+\end{table}
+
+\begin{atencao}
+\textbf{Nota Oficial sobre o Provador Microsoft Z3 e Tecnologias de Próxima Geração:}
+Os tópicos de pesquisa de fronteira apresentados neste manual — tais como o \textbf{Microsoft Z3 SMT Theorem Prover} (Capítulo~\ref{sec:next_gen_implementations}), a virtualização de rádio \textbf{NimBLE/Netsim}, os daemons nativos em \textbf{Rust} e a compilação monolítica do \textbf{AOSP Android 15} (250 GB) — \textbf{entraram como evolução posterior da plataforma de especialização}. Eles constituem o conteúdo formativo de aprofundamento das 435 horas da Residência Tecnológica e \textbf{NÃO} são pré-requisitos para a prova de ingresso até terça-feira. O teste de admissão restringe-se estritamente às 3 tarefas em Python puro fornecidas no Starter Kit.
+\end{atencao}
+
+\section{Arquitetura do Starter Kit e Redução Estratégica de Escopo}
+\label{sec:starter_kit}
+
+Para evitar barreiras artificiais de ambiente (máquinas com poucos recursos, ausência de Linux ou toolchains pesadas de NDK), o desafio foi encapsulado em \textbf{Python 3.8+ padrão}, sem necessidade de qualquer instalação via \texttt{pip}.
+
+Cerca de \textbf{80\% da infraestrutura foi fornecida pré-construída} no pacote \texttt{starter\_kit/}:
+\begin{itemize}
+    \item \texttt{seldon\_core/telemetry.py}: Classe \texttt{TelemetryFrame} contendo os vetores de telemetria multivariada (CPU, memória, taxa de transações Binder, temperatura de junção, percentual de bateria e tempo de quadro).
+    \item \texttt{tests/test\_desafio.py}: Suíte oficial de 15 testes unitários utilizando o framework canônico \texttt{unittest}.
+    \item \texttt{submission\_template.md}: Ficha de submissão de 1 página para estruturar a defesa técnica do candidato.
+\end{itemize}
+
+O candidato precisa implementar apenas 3 funções pontuais (\texttt{TODOs}):
+
+\subsection{Tarefa 1: Guardião de Segurança IPC Binder (security\_guard.py)}
+No Android, transações inter-processos (IPC) compartilham o buffer de memória do driver \texttt{/dev/binder}. Transações desmedidas deflagram \texttt{TransactionTooLargeException} e derrubam serviços de sistema.
+\begin{enumerate}
+    \item Invocar \texttt{clean\_expired\_tokens} para purgar tokens com mais de 60 segundos de retenção.
+    \item Rejeitar transações cujo tamanho seja superior a 800 KB (motivo: \texttt{BUFFER\_OVERFLOW}, status 400) ou menor/igual a zero (\texttt{INVALID\_SIZE}, status 400).
+    \item Rejeitar tokens duplicados ativos na janela de TTL (motivo: \texttt{REPLAY\_ATTACK\_DETECTED}, status 403).
+    \item Registrar tokens legítimos e aprovar a transação (\texttt{APPROVED}, status 200).
+\end{enumerate}
+
+\subsection{Tarefa 2: IA On-Device e Detecção de Anomalias com MSE (anomaly\_detector.py)}
+Modelos neurais autoassociativos leves comprimem trajetórias nominais de telemetria. Em situações de estresse anômalo, o erro de reconstrução MSE se eleva vertiginosamente.
+\begin{enumerate}
+    \item Implementar \texttt{calculate\_mse(vector\_a, vector\_b)} segundo a formulação canônica:
+    \begin{equation}
+        \text{MSE} = \frac{1}{N} \sum_{i=0}^{N-1} (a_i - b_i)^2
+    \end{equation}
+    validando compatibilidade dimensional (levantando \texttt{ValueError} para vetores vazios ou com tamanhos discrepantes).
+    \item Implementar \texttt{evaluate\_frame(frame)} normalizando os sinais na escala $[0.0, 1.0]$, acionando a reconstrução do Autoencoder, computando o MSE e emitindo alerta caso $\text{MSE} > \tau_{\text{critico}}$.
+\end{enumerate}
+
+\subsection{Tarefa 3: Otimizador Energético e Salvaguardas Térmicas (power\_tuner.py)}
+Navegar dinamicamente na Fronteira de Pareto entre taxa de quadros (FPS) e potência dissipada em SoCs heterogêneos:
+\begin{enumerate}
+    \item \textbf{Emergência Térmica:} Se a temperatura do chip ultrapassar $48.0^\circ\text{C}$ ou a carga da bateria for $\le 15.0\%$, forçar imediatamente o perfil \texttt{THERMAL\_EMERGENCY} (teto de 30 FPS e frequências mínimas de CPU/GPU).
+    \item \textbf{Modo Performance:} 120 FPS é concedido exclusivamente se a bateria for $> 30.0\%$ e a temperatura for $\le 42.0^\circ\text{C}$; caso contrário, aplicar fallback de segurança para \texttt{BALANCED} (90 FPS).
+    \item \textbf{Modo Balanced:} 90 FPS exige temperatura $\le 45.0^\circ\text{C}$ e bateria $> 20.0\%$ (senão, fallback para \texttt{ECO} a 60 FPS).
+    \item \textbf{Modo Eco:} Cargas de 60 FPS operam com dissipação de apenas $1100\,\text{mW}$.
+\end{enumerate}
+
+\section{Matriz de Pontuação e Roteiro de Entrevista Técnica}
+\label{sec:rubrica_avaliacao}
+
+A nota global do candidato (escala de 0 a 100 pontos) é composta por três dimensões complementares:
+\begin{enumerate}
+    \item \textbf{Testes Automatizados (40 pontos):} Avaliação binária e determinística via \texttt{test\_desafio.py}. 15 testes aprovados conferem pontuação integral.
+    \item \textbf{Qualidade e Rigor de Código (30 pontos):} Organização, conformidade com a convenção PEP 8, elegância algorítmica e profundidade das respostas na Ficha Técnica de 1 página.
+    \item \textbf{Entrevista Técnica Individual (30 pontos):} Arguição de 15 minutos com o Tech Lead (Matheus Uchoa) e a Coordenação, avaliando o domínio autoral da solução, a capacidade de explicar os trade-offs físicos e a comunicação técnica.
+\end{enumerate}
+
+Ao final das entrevistas de quinta-feira, os candidatos serão ordenados pelo somatório final para preenchimento imediato das 20 a 25 vagas de residentes titulares.

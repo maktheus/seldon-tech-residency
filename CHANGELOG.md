@@ -20,6 +20,12 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
   - `desafio_selecao/GUIA_AVALIACAO_E_ENTREVISTA.md`: Rubrica de 0 a 100 pontos e roteiro de perguntas para arguição de 15 minutos.
   - `desafio_selecao/corrigir_candidatos.py`: Script de correção em lote para ranqueamento automatizado.
   - Especificação formal em `docs/features/FEATURE_011_SELECTION_PROCESS_CHALLENGE.md`.
+- **Reestruturação Central do Desafio na Plataforma Web e no Manual PDF**:
+  - Novo Hub Interativo do Desafio em `src/components/modules/SelectionChallengeSection.tsx` posicionado em destaque logo após o Hero scene.
+  - Simulador interativo em tempo real na interface web demonstrando a aprovação dos 15 testes unitários e comportamento das 3 tarefas.
+  - Botão de acesso rápido em destaque na barra de navegação (`Navbar.tsx`) direcionando para o Desafio com entrega na terça 23:59.
+  - Geração do documento oficial do desafio `public/desafio_tecnico_seldon_2026.pdf` e integração como Capítulo 8 no manual técnico LaTeX (`manual_seldon_tecnico.pdf`).
+  - Nota formal de escopo esclarecendo aos candidatos e banca que o provador formal Microsoft Z3, Rust nativo e rádio NimBLE entraram como pesquisas avançadas posteriores e não constituem pré-requisitos eliminatórios.
 
 ## [Unreleased] - 2026-10-23
 

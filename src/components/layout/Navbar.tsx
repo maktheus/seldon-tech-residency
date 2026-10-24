@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, HelpCircle, Search, Cpu, GitBranch, FileText } from 'lucide-react';
+import { Sparkles, HelpCircle, Search, Cpu, FileText, Download } from 'lucide-react';
 
 interface NavbarProps {
   activeModuleId: number | null;
@@ -78,22 +78,31 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          {/* DESAFIO TÉCNICO CTA BUTTON */}
           <a
-            href="./manual_seldon_tecnico.pdf"
-            download="Manual_Seldon_Residencia_Tecnologica.pdf"
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/40 text-violet-300 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer shadow-sm"
-            title="Baixar Manual Completo em PDF (LaTeX)"
+            href="#desafio-tecnico"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-xl text-xs font-mono transition-all cursor-pointer shadow-lg shadow-cyan-500/25"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-slate-950" />
+            <span>🎯 Desafio 2026</span>
+          </a>
+
+          <a
+            href="./desafio_tecnico_seldon_2026.pdf"
+            download="Desafio_Tecnico_Seldon_2026.pdf"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-violet-600/20 hover:bg-violet-600/30 border border-violet-500/40 text-violet-300 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer shadow-sm"
+            title="Baixar Guia Oficial do Desafio Técnico (PDF)"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Manual PDF (LaTeX)</span>
+            <span>Guia Desafio (.pdf)</span>
           </a>
 
           <button
             onClick={onOpenQuiz}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer shadow-sm"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer shadow-sm"
           >
             <HelpCircle className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Desafio Quiz</span>
+            <span>Quiz</span>
           </button>
 
           <a

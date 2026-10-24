@@ -36,6 +36,7 @@ import { AospEmulatorConsole } from './components/interactive/AospEmulatorConsol
 import { LiteratureBenchmarkDashboard } from './components/interactive/LiteratureBenchmarkDashboard';
 import { MarketRoadmapView } from './components/interactive/MarketRoadmapView';
 import { NextGenTechShowcase } from './components/interactive/NextGenTechShowcase';
+import { SelectionChallengeSection } from './components/modules/SelectionChallengeSection';
 
 export const App: React.FC = () => {
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -131,6 +132,9 @@ export const App: React.FC = () => {
             }}
           />
         </section>
+
+        {/* DESAFIO TÉCNICO PRÁTICO: MINI-SELDON ENGINE (PROCESSO SELETIVO 2026) */}
+        <SelectionChallengeSection />
 
         {/* MODULE SELECTOR TABS */}
         <section className="space-y-4 pt-6">
