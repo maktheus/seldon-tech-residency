@@ -7,6 +7,16 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ## [Unreleased] - 2026-10-23
 
+### Adicionado (Verificação Formal com Microsoft Z3 SMT Theorem Prover)
+- **Verificação de Políticas SELinux no AOSP com Z3**:
+  - Script executável `scripts/z3_formal_verification.py` modelando domínios de segurança e transições em lógica `QF_UF`.
+  - Prova matemática **`UNSAT`** demonstrando ausência de caminhos de escalonamento de privilégios de `untrusted_app` para `root_domain`.
+- **Síntese Térmica e Factibilidade Física de Frequências DVFS**:
+  - Modelagem termodinâmica em lógica `QF_LRA` comprovando `SAT` para metas operacionais viáveis (60 FPS @ $\le 45^\circ\text{C}$) e `UNSAT` para metas termodinamicamente impossíveis.
+- **Suíte de Testes Automatizados Expandida (5/5 Etapas)**:
+  - Script de testes unitários `scripts/test_z3_verification.py` integrado à pipeline `npm run test:projects`.
+  - Especificação formal de feature em `docs/features/FEATURE_010_Z3_SMT_FORMAL_VERIFICATION.md`.
+
 ### Adicionado (Implementação Prática de Tecnologias de Próxima Geração: Rust, NimBLE, INT4 e Perfetto)
 - **Implementação do Daemon Nativo em Rust (`seldond_rs`)**:
   - Código fonte seguro em `aosp/packages/services/SeldonCore/rust/` eliminando use-after-free e buffer overflows com borrow checker estático.

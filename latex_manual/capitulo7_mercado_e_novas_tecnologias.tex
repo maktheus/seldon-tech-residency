@@ -99,3 +99,10 @@ Desenvolvido em \texttt{scripts/quantization\_int4\_benchmark.py}, o quantizador
 \subsection{Gatilhos Cirúrgicos de Tracing Perfetto / eBPF}
 No script \texttt{scripts/perfetto\_anomaly\_tracer.py}, o sistema abandona o tracing contínuo (que degradaria a bateria em 8\% a 15\%) e implementa gatilhos dinâmicos. Ao detectar anomalias, um buffer circular de 1024 KB captura eventos críticos de kernel (\texttt{sched/sched\_switch}, \texttt{power/cpu\_frequency} e \texttt{binder/binder\_transaction}), permitindo inspeção cirúrgica na interface oficial do Perfetto.
 
+\subsection{Verificação Formal com Microsoft Z3 SMT Solver}
+No script \texttt{scripts/z3\_formal\_verification.py}, o provador de teoremas Z3 (v4.16.0) é aplicado para obter garantias matemáticas estritas em duas frentes:
+\begin{enumerate}
+    \item \textbf{Segurança SELinux (Lógica QF\_UF):} Prova formalmente com resultado \textbf{UNSAT} que não existe nenhum caminho de escalonamento de privilégios que permita a um processo não-confiável (\texttt{untrusted\_app}) atingir o domínio de superusuário (\texttt{root}) através de transições no \texttt{seldond}.
+    \item \textbf{Síntese DVFS \& Física Térmica (Lógica QF\_LRA):} Modela a dissipação térmica real do silício ($T_{\text{SoC}} = 25.0 + 0.0065 \times P_{\text{SoC}}$), provando matematicamente \textbf{SAT} para metas factíveis de 60 FPS ($f_{\text{CPU}} = 1.875\,\text{GHz}$) e \textbf{UNSAT} para regimes termodinamicamente inatingíveis (ex.: 120 FPS sob teto de $\le 35^\circ\text{C}$).
+\end{enumerate}
+

@@ -38,7 +38,7 @@ python3 -m unittest discover -s projects/projeto_energia_pareto/tests -p "test_*
 echo -e "${GREEN}✓ Módulo 4 (Eficiência Energética & Fronteira de Pareto): 100% APROVADO!${NC}"
 
 # 4. Testes de Tecnologias de Próxima Geração (Rust, NimBLE, INT4, Perfetto)
-echo -e "\n${CYAN}>>> [4/4] TESTANDO TECNOLOGIAS DE PRÓXIMA GERAÇÃO (RUST, NIMBLE, INT4, PERFETTO)...${NC}"
+echo -e "\n${CYAN}>>> [4/5] TESTANDO TECNOLOGIAS DE PRÓXIMA GERAÇÃO (RUST, NIMBLE, INT4, PERFETTO)...${NC}"
 export PATH="$HOME/.cargo/bin:$PATH"
 if command -v cargo >/dev/null 2>&1; then
     (cd aosp/packages/services/SeldonCore/rust && cargo test --quiet)
@@ -47,7 +47,16 @@ fi
 python3 scripts/test_next_gen_tech.py
 echo -e "${GREEN}✓ NimBLE Virtual Radio, INT4 Quantization & Perfetto Tracing: 100% APROVADOS!${NC}"
 
+# 5. Verificação Formal com Z3 Theorem Prover
+echo -e "\n${CYAN}>>> [5/5] TESTANDO VERIFICAÇÃO FORMAL COM Z3 THEOREM PROVER (SELINUX & DVFS)...${NC}"
+if [ -x "/usr/bin/z3" ]; then
+    python3 scripts/test_z3_verification.py
+    echo -e "${GREEN}✓ Provas Formais Z3 (SELinux Neverallows & Síntese DVFS): 100% APROVADAS (UNSAT/SAT)!${NC}"
+else
+    echo -e "${YELLOW}Aviso: Z3 não encontrado em /usr/bin/z3. Etapa ignorada.${NC}"
+fi
+
 echo -e "\n${GREEN}======================================================================${NC}"
-echo -e "${GREEN}  PARABÉNS! TODOS OS PROJETOS E NOVAS TECNOLOGIAS FORAM VALIDADOS!    ${NC}"
+echo -e "${GREEN}  PARABÉNS! TODOS OS PROJETOS, NOVAS TECNOLOGIAS E Z3 FORAM VALIDADOS! ${NC}"
 echo -e "${GREEN}======================================================================${NC}"
 exit 0

@@ -86,3 +86,4 @@
 \contentsline {subsection}{\numberline {7.5.2}Ponte de Rádio NimBLE e Netsim (HCI Advertisement)}{39}{subsection.7.5.2}%
 \contentsline {subsection}{\numberline {7.5.3}Quantização INT4 em Nibbles (LiteRT)}{39}{subsection.7.5.3}%
 \contentsline {subsection}{\numberline {7.5.4}Gatilhos Cirúrgicos de Tracing Perfetto / eBPF}{39}{subsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.5.5}Verificação Formal com Microsoft Z3 SMT Solver}{39}{subsection.7.5.5}%
