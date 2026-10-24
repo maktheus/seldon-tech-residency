@@ -5,6 +5,22 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ---
 
+## [Unreleased] - 2026-10-24
+
+### Adicionado (Desafio Técnico Prático do Processo Seletivo Seldon 2026)
+- **Modularização e Redução Estratégica de Escopo (`desafio_selecao/`)**:
+  - Reestruturação do desafio de admissão para os ~30 candidatos pré-selecionados (entrega na terça-feira às 23:59 e entrevistas na quarta/quinta-feira).
+  - Eliminação de dependências pesadas (compilação AOSP, toolchains Rust/C++, Z3 Solver e hardware Monsoon), mantendo execução 100% em Python 3 padrão.
+  - Entrega de 80% do boilerplate pronto no `starter_kit/`, cabendo ao candidato implementar 3 funções cirúrgicas (`TODOs`):
+    - `seldon_core/security_guard.py`: Sanitização e prevenção de Replay Attacks em IPC Binder.
+    - `seldon_core/anomaly_detector.py`: Cálculo do Erro Quadrático Médio (MSE) e limiar adaptativo de detecção.
+    - `seldon_core/power_tuner.py`: Gerenciador de perfis de energia e fallback na Fronteira de Pareto.
+  - Suíte de 15 testes unitários em `tests/test_desafio.py` com feedback instantâneo (<0.01s).
+  - Pacote compactado `desafio_selecao/starter_kit_seldon_2026.zip` para disparo imediato aos candidatos.
+  - `desafio_selecao/GUIA_AVALIACAO_E_ENTREVISTA.md`: Rubrica de 0 a 100 pontos e roteiro de perguntas para arguição de 15 minutos.
+  - `desafio_selecao/corrigir_candidatos.py`: Script de correção em lote para ranqueamento automatizado.
+  - Especificação formal em `docs/features/FEATURE_011_SELECTION_PROCESS_CHALLENGE.md`.
+
 ## [Unreleased] - 2026-10-23
 
 ### Adicionado (Verificação Formal com Microsoft Z3 SMT Theorem Prover)

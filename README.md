@@ -33,6 +33,25 @@ Conteúdo extraído e estruturado a partir do documento oficial `Módulos - Seld
 
 ---
 
+
+---
+
+## 🎯 Processo Seletivo 2026: Desafio Prático "Mini-Seldon"
+
+Para a admissão de novos residentes, o repositório disponibiliza um pacote estruturado e simplificado de avaliação prática:
+
+- 📁 **Diretório do Desafio:** [`desafio_selecao/`](./desafio_selecao/)
+- 📦 **Pacote Pronto para Envio aos Candidatos:** [`starter_kit_seldon_2026.zip`](./desafio_selecao/starter_kit_seldon_2026.zip)
+- 📖 **Instruções para o Candidato:** [`desafio_selecao/starter_kit/README.md`](./desafio_selecao/starter_kit/README.md)
+- 📝 **Ficha de Submissão para Entrevista:** [`submission_template.md`](./desafio_selecao/starter_kit/submission_template.md)
+- ⚖️ **Guia da Banca & Perguntas de Entrevista:** [`GUIA_AVALIACAO_E_ENTREVISTA.md`](./desafio_selecao/GUIA_AVALIACAO_E_ENTREVISTA.md)
+- ⚡ **Corretor Automatizado em Lote:** `npm run correct:candidates` ou `python desafio_selecao/corrigir_candidatos.py`
+
+```bash
+# Executar testes da suíte do desafio de admissão
+npm run test:challenge
+```
+
 ## 📦 Como Executar Localmente
 
 ```bash

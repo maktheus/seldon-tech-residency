@@ -15,7 +15,9 @@
     "hooks:install": "./scripts/install_hooks.sh",
     "test:projects": "./scripts/run_all_project_tests.sh",
     "benchmark:literature": "python3 scripts/benchmark_against_literature.py",
-    "validate:device": "python3 scripts/validate_real_device.py"
+    "validate:device": "python3 scripts/validate_real_device.py",
+    "test:challenge": "python -m unittest discover -s desafio_selecao/starter_kit/tests -p 'test_*.py'",
+    "correct:candidates": "python desafio_selecao/corrigir_candidatos.py"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
