@@ -1,0 +1,19 @@
+[package]
+name = "seldond_rs"
+version = "1.0.0"
+edition = "2021"
+authors = ["Seldon Tech Residency Team <residency@seldon.tech>"]
+description = "High-performance memory-safe native AOSP telemetry daemon in Rust"
+
+[dependencies]
+# Dependências padrão de ecossistema Rust no AOSP
+# Em ambiente de build AOSP Soong, utiliza libbinder_rs e log
+# Para compilação standalone em host x86_64/arm64, simulamos stubs do Binder
+
+[lib]
+name = "seldon_telemetry"
+path = "src/lib.rs"
+
+[[bin]]
+name = "seldond_rs"
+path = "src/main.rs"

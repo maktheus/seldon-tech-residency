@@ -35,6 +35,7 @@ import { ProjectArchitectures } from './components/modules/ProjectArchitectures'
 import { AospEmulatorConsole } from './components/interactive/AospEmulatorConsole';
 import { LiteratureBenchmarkDashboard } from './components/interactive/LiteratureBenchmarkDashboard';
 import { MarketRoadmapView } from './components/interactive/MarketRoadmapView';
+import { NextGenTechShowcase } from './components/interactive/NextGenTechShowcase';
 
 export const App: React.FC = () => {
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -357,6 +358,9 @@ export const App: React.FC = () => {
 
         {/* LEVANTAMENTO DE MELHORIAS (NIMBLE/NETSIM/RUST) E ESTUDO DE MERCADO COMERCIAL */}
         <MarketRoadmapView />
+
+        {/* FRONTEIRAS TECNOLÓGICAS: RUST NATIVO, APACHE NIMBLE, INT4 LITER T E PERFETTO TRACING */}
+        <NextGenTechShowcase />
       </main>
 
       {/* Footer */}

@@ -28,6 +28,9 @@ aidl_interface {
         ndk: {
             enabled: true,
         },
+        rust: {
+            enabled: true,
+        },
     },
     versions_with_info: [
         {
@@ -64,4 +67,18 @@ cc_binary {
         scudo: true,
         hwaddress: false,
     },
+}
+
+// 3. Compilação do Daemon Nativo em RUST (seldond_rs) - Modern AOSP Memory-Safe Service
+rust_binary {
+    name: "seldond_rs",
+    crate_name: "seldond_rs",
+    srcs: ["../rust/src/main.rs"],
+    rustlibs: [
+        "libbinder_rs",
+        "liblog_rust",
+        "com.seldon.os.telemetry-V1-rust",
+    ],
+    prefer_rlib: true,
+    init_rc: ["seldond_rs.rc"],
 }
